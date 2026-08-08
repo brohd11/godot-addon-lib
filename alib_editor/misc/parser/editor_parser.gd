@@ -63,6 +63,7 @@ func _ready() -> void:
 	ProjectSettings.settings_changed.connect(_on_project_settings_changed)
 	ScriptEditorRef.subscribe(ScriptEditorRef.Event.VALIDATE_SCRIPT, _on_script_validate)
 	ScriptEditorRef.subscribe(ScriptEditorRef.Event.EDITOR_SCRIPT_CHANGED, _on_editor_script_changed)
+	ScriptEditorRef.subscribe(ScriptEditorRef.Event.TEXT_CHANGED, _on_text_changed)
 	_on_editor_script_changed(ScriptEditorRef.get_current_script())
 
 func _on_project_settings_changed():
@@ -71,6 +72,8 @@ func _on_project_settings_changed():
 
 func _on_text_changed():
 	gdscript_parser.reset_caret_context()
+	# keep line ranges tracking the buffer; the debounced VALIDATE_SCRIPT parse still owns members
+	gdscript_parser.sync_line_ranges()
 
 
 func _on_script_validate():
