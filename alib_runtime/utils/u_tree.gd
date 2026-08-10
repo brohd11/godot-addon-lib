@@ -86,7 +86,7 @@ class get_drop_data:
 		var data_type = "files"
 		var selected_paths = []
 		for path in selected_item_paths:
-			print(path)
+			#print(path)
 			if DirAccess.dir_exists_absolute(path):
 				data_type = "files_and_dirs"
 				if not path.ends_with("/"):

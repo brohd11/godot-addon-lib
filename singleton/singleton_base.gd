@@ -180,6 +180,7 @@ func _init(node:Node=null):
 ## Implement in extended classes
 
 #extends Singletons.Base # if class_name, use absolute path
+#extends "res://addons/addon_lib/brohd/singleton/singleton_base.gd"
 
 # Use 'PE_STRIP_CAST_SCRIPT' to auto strip type casts with plugin exporter, if the class is not a global name
 #const PE_STRIP_CAST_SCRIPT = preload("this_file")

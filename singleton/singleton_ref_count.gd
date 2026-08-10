@@ -1,5 +1,5 @@
 #! namespace Singletons.RefCount
-extends Singletons.Base
+extends "res://addons/addon_lib/brohd/singleton/singleton_base.gd" #! ext Singletons.Base
 
 
 static func _get_singleton_type() -> SingletonType:
@@ -49,6 +49,7 @@ func _init(node):
 ## Implement in extended classes
 
 #extends Singletons.RefCount # if the class is not global class else do script path
+#extends "res://addons/addon_lib/brohd/singleton/singleton_ref_count.gd"
 
 # Use 'PE_STRIP_CAST_SCRIPT' to auto strip type casts with plugin exporter, if the class is not a global name
 #const PE_STRIP_CAST_SCRIPT = preload("this_file")

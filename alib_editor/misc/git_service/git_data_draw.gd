@@ -1,5 +1,7 @@
 extends RefCounted
 
+## shared status drawing helpers for Tree and ItemList.
+
 const NUTree = preload("uid://coqq638olix8k") #! resolve ALibRuntime.NodeUtils.NUTree
 const NUItemList = preload("uid://cjls86v1v4242") #! resolve ALibRuntime.NodeUtils.NUItemList
 const TreeHelperBase = preload("uid://bm6fl2iu4jew7") #! resolve ALibRuntime.TreeHelperBase
@@ -101,7 +103,7 @@ class GitTreeHelper:
 		var item:TreeItem = _tree.get_root()
 		while is_instance_valid(item):
 			for key in [Keys.GIT_ICON, Keys.OWN_COLOR, Keys.IS_REPO]:
-				if item.has_meta(key): # remove_meta errors on a key that is not there
+				if item.has_meta(key):
 					item.remove_meta(key)
 				item.clear_custom_color(0)
 			var meta = item.get_metadata(0)
@@ -122,8 +124,6 @@ class GitTreeHelper:
 		if file_path.ends_with("/") and git_service.is_repo(file_path):
 			tree_item.set_meta(Keys.IS_REPO, true)
 			
-		# a row with its own git color (repo, ignored, itself a change) keeps it when a
-		# descendant bubbles up — only an uncolored row takes a descendant's severity color
 		tree_item.set_meta(Keys.OWN_COLOR, true)
 		var icon = git_service.get_file_icon(file_path)
 		if icon == null:
@@ -139,14 +139,11 @@ class GitTreeHelper:
 					par.set_custom_color(0, color)
 			
 			if par.has_meta(Keys.IS_REPO):
-				# once you break a repo barrier, this should continue up as a low severity
-				# message. Any message in the parent repo, will beat this one
 				color = git_service.colors.repo
 				severity = GitUtil.Severity.NESTED
 			
 			par = par.get_parent()
 	
-	# first tree must calculate visible rects then queue the overlay to draw them
 	func _on_tree_draw():
 		_overlay_icons.clear()
 		
@@ -168,7 +165,6 @@ class GitTreeHelper:
 			if current_rect.position.y < 0 - current_rect.size.y or current_rect.position.y > tree_rect.size.y:
 				continue
 			
-			# anything not in view or with no icon is a no-op
 			
 			var meta = current_item.get_meta(Keys.GIT_ICON)
 			var icon:Texture2D = meta.icon
@@ -184,7 +180,6 @@ class GitTreeHelper:
 			
 		_overlay.queue_redraw()
 
-	# just draw the precalced textures
 	func _draw_icon_overlay():
 		for data in _overlay_icons:
 			_overlay.draw_texture_rect(
@@ -193,8 +188,6 @@ class GitTreeHelper:
 				false, 
 				data.get(Keys.COLOR))
 	
-	# a less severe descendant must not overwrite the marker a more severe one left.
-	# returns whether the meta was (re)written, so the caller knows the row color may follow
 	func _set_item_meta(tree_item:TreeItem, icon:Texture2D, color:Color, severity:int) -> bool:
 		var existing:Dictionary = tree_item.get_meta(Keys.GIT_ICON, {})
 		if int(existing.get(Keys.SEVERITY, GitUtil.Severity.NONE)) >= severity:
@@ -208,7 +201,6 @@ class GitTreeHelper:
 
 class Util:
 	static func get_icon_rect(rect:Rect2, icon:Texture2D, margin:int):
-		#rect.position.x += rect.size.x - icon.get_size().x - margin
 		rect.position.x += rect.size.x - (icon.get_size().x / 2.0) - margin
 		rect.position.y += (rect.size.y - icon.get_size().y) / 2.0
 		rect.size = icon.get_size()
