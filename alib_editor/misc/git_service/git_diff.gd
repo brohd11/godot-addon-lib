@@ -357,3 +357,59 @@ static func _mark(markers:PackedByteArray, line:int, mask:int) -> void:
 	if line < 0 or line >= markers.size():
 		return
 	markers[line] |= mask
+
+
+## A 0 based new-text line as the line it was in the old text, or -1 for one the old text does not
+## have. Takes hunks and not a diff, as hunks_to_markers() does, so parse_patch()'s work too.
+##
+## What a line's history needs: git blame numbers lines as the commit has them, and the buffer has
+## moved since. A line inside an addition answers -1 — there is nothing committed to attribute it to.
+static func map_new_to_old(hunks:Array, line:int) -> int:
+	if line < 0:
+		return -1
+
+	# what every hunk ending before this line does to its number. Summed rather than searched for, so
+	# the hunks need not be in order
+	var offset = 0
+
+	for hunk:Dictionary in hunks:
+		# 0 based, as in hunks_to_markers: a zero count start already names the line before the change
+		var new_start:int = hunk[GitUtil.Keys.NEW_START]
+		if hunk[GitUtil.Keys.NEW_COUNT] != 0:
+			new_start -= 1
+
+		if line < new_start:
+			continue
+
+		if line < new_start + hunk[GitUtil.Keys.NEW_COUNT]:
+			return _map_within(hunk, line, new_start)
+
+		offset += hunk[GitUtil.Keys.OLD_COUNT] - hunk[GitUtil.Keys.NEW_COUNT]
+
+	return line + offset
+
+
+# Where in a hunk a new-text line lands. Walked rather than offset: a hunk's span is wider than its
+# changes — diff_lines() carries CONTEXT lines either side — so a line inside one is usually still a
+# committed line, and only the origins say which.
+static func _map_within(hunk:Dictionary, line:int, new_start:int) -> int:
+	var old_i:int = hunk[GitUtil.Keys.OLD_START]
+	if hunk[GitUtil.Keys.OLD_COUNT] != 0:
+		old_i -= 1
+	var new_i = new_start
+
+	for entry:Dictionary in hunk[GitUtil.Keys.LINES]:
+		match entry[GitUtil.Keys.ORIGIN]:
+			"-":
+				old_i += 1 # occupies no new line, so `line` cannot be it
+			"+":
+				if new_i == line:
+					return -1
+				new_i += 1
+			_:
+				if new_i == line:
+					return old_i
+				old_i += 1
+				new_i += 1
+
+	return -1 # unreachable while the caller only enters for a line the hunk covers

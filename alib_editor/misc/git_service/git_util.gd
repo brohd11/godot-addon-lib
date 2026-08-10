@@ -570,6 +570,162 @@ static func _parse_refs(field:String) -> Array[String]:
 	return tags
 
 
+## The argv for blaming one file at a rev, split from the spawn so it can be tested.
+##
+## `--porcelain` and not `--line-porcelain`: the commit header is emitted once per commit rather than
+## once per line, which is ~800 output lines for a 700 line file where the latter is ~9000. Same trap
+## as build_show_args — blame takes a pathname after `--`, so PATHSPEC_LITERAL must not be prefixed.
+static func build_blame_args(rev:String, repo_dir:String, res_path:String) -> Array:
+	return ["blame", "--porcelain", rev, "--", to_repo_path(repo_dir, res_path)]
+
+
+## Which commit last touched each line of a file at a rev. Blocking — run it off the main thread.
+##
+## HEAD and not the worktree: the file on disk is not what the editor's buffer holds either, and HEAD
+## is the baseline the gutter's hunks already map a buffer line back to.
+##
+## Only OK and ABSENT, unlike get_file_at_head: a missing file, a directory that is not a repo and an
+## ignored file all mean the same thing here — no history to show — so none of them is worth a spawn
+## to tell apart.
+#! keys head:Head commits:Dictionary blame_lines:PackedStringArray
+static func get_blame(repo_dir:String, res_path:String, rev:=REV_HEAD) -> Dictionary:
+	var result = run_git(repo_dir, build_blame_args(rev, repo_dir, res_path))
+
+	var output:Array = result[Keys.OUTPUT]
+	if result[Keys.EXIT] != 0 or output.is_empty():
+		return {Keys.HEAD: Head.ABSENT, Keys.COMMITS: {}, Keys.BLAME_LINES: PackedStringArray()}
+
+	var parsed = parse_blame(String(output[0]))
+	parsed[Keys.HEAD] = Head.OK
+	return parsed
+
+
+## The parse half of get_blame, split out so it can be exercised against captured git output without
+## spawning anything. See tests/brohd/git/.
+##
+## Porcelain states a commit's header only the first time that commit appears, so COMMITS fills in as
+## the output is walked and BLAME_LINES carries nothing but a sha to look up in it.
+#! keys commits:Dictionary blame_lines:PackedStringArray
+static func parse_blame(text:String) -> Dictionary:
+	var commits:Dictionary = {}
+	var blame_lines := PackedStringArray()
+	# which commit's header is being read, and the flag for "the next line starts a new entry"
+	var sha := ""
+
+	for raw_line in text.split("\n", false):
+		var line = raw_line.trim_suffix("\r")
+
+		# the content line is the only indented one, and it closes the entry — nothing in it is read
+		if line.begins_with("\t"):
+			sha = ""
+			continue
+
+		if not sha.is_empty():
+			_parse_blame_header(line, commits[sha])
+			continue
+
+		# "<sha> <line in the commit> <line in the file> [<lines in this group>]", the count being
+		# present only on a group's first line
+		var header = line.split(" ", false)
+		if header.size() < 3:
+			continue
+
+		sha = header[0]
+		var final_line = int(header[2])
+		# 1 based, and assigned by index rather than appended: nothing about the format promises the
+		# groups arrive in file order, and appending would silently shift every line after one that did not
+		if final_line > blame_lines.size():
+			blame_lines.resize(final_line)
+		blame_lines[final_line - 1] = sha
+
+		if not commits.has(sha):
+			commits[sha] = _new_blame_commit(sha)
+
+	return {Keys.COMMITS: commits, Keys.BLAME_LINES: blame_lines}
+
+
+# One `key value` line of a commit's header. Only what a row displays is kept — `previous`,
+# `filename`, the committer fields and the valueless `boundary` all fall through.
+static func _parse_blame_header(line:String, commit:Dictionary) -> void:
+	var parts = line.split(" ", true, 1)
+	if parts.size() < 2:
+		return # `boundary` and friends carry no value
+
+	var value = parts[1]
+	match parts[0]:
+		"author": commit[Keys.AUTHOR] = value
+		"author-mail": commit[Keys.AUTHOR_MAIL] = value.trim_prefix("<").trim_suffix(">")
+		"author-time":
+			commit[Keys.AUTHOR_TIME] = int(value)
+			commit[Keys.DATE] = format_relative_time(int(value))
+		"author-tz": commit[Keys.AUTHOR_TZ] = value
+		"summary": commit[Keys.SUBJECT] = value
+
+
+# The shape parse_log() returns plus blame's own fields, so a blame commit can be handed to anything
+# that already renders a log row. TAGS is not in porcelain output and stays empty rather than faked.
+static func _new_blame_commit(sha:String) -> Dictionary:
+	return {
+		Keys.HASH: sha.left(SHORT_OID),
+		Keys.FULL_HASH: sha,
+		Keys.SUBJECT: "",
+		Keys.AUTHOR: "",
+		Keys.DATE: "",
+		Keys.TAGS: [] as Array[String],
+		Keys.AUTHOR_MAIL: "",
+		Keys.AUTHOR_TIME: 0,
+		Keys.AUTHOR_TZ: "",
+	}
+
+
+const MINUTE = 60
+const HOUR = 60 * MINUTE
+const DAY = 24 * HOUR
+const WEEK = 7 * DAY
+## An average month and year, as git's own relative dates use — exact ones would need the calendar
+## and would still be wrong for the gap either side of them.
+const MONTH = 30 * DAY
+const YEAR = 365 * DAY
+
+## Each row is [unit, the delta it stops covering, its name]. Walked in order, so the first row wide
+## enough wins; the thresholds are git's, which is why they are not simply one unit of the next size.
+const RELATIVE_UNITS = [
+	[1, 90, "second"],
+	[MINUTE, 90 * MINUTE, "minute"],
+	[HOUR, 36 * HOUR, "hour"],
+	[DAY, 14 * DAY, "day"],
+	[WEEK, 10 * WEEK, "week"],
+	[MONTH, 12 * MONTH, "month"],
+]
+
+## A timestamp as git's own `%ar` words: "3 days ago". The one place a date is computed rather than
+## read — blame porcelain gives a raw epoch, where `git log` had %ar do this for us.
+##
+## `now` is a parameter so the buckets can be tested against a fixed clock.
+static func format_relative_time(unix_time:int, now:=-1) -> String:
+	if unix_time <= 0:
+		return ""
+	if now < 0:
+		now = int(Time.get_unix_time_from_system())
+
+	var delta = now - unix_time
+	# a skewed clock, or a commit whose author date is ahead of its commit date. git says this too
+	if delta < 0:
+		return "in the future"
+
+	for unit in RELATIVE_UNITS:
+		if delta < unit[1]:
+			return _plural(int(round(float(delta) / unit[0])), unit[2])
+
+	return _plural(int(round(float(delta) / YEAR)), "year")
+
+
+# "1 day ago" / "3 days ago". Only the seconds bucket can reach 0, and "0 seconds ago" is what git
+# prints there too.
+static func _plural(count:int, unit:String) -> String:
+	return "%d %s%s ago" % [count, unit, "" if count == 1 else "s"]
+
+
 static func _new_branch() -> Dictionary:
 	return {
 		Keys.BRANCH_NAME: "",
@@ -1128,6 +1284,15 @@ class Keys:
 	const AUTHOR = &"author"
 	const DATE = &"date"
 	const TAGS = &"tags"
+
+	## a parse_blame() result. COMMITS is keyed by full sha; BLAME_LINES holds one of those shas per
+	## line of the blamed file, 0 based, so a line costs a lookup rather than a copy of the commit
+	const COMMITS = &"commits"
+	const BLAME_LINES = &"blame_lines"
+	## blame's own commit fields, on top of the ones a parse_log() record already carries
+	const AUTHOR_MAIL = &"author_mail"
+	const AUTHOR_TIME = &"author_time"
+	const AUTHOR_TZ = &"author_tz"
 
 
 class Colors:
