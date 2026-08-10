@@ -1,5 +1,4 @@
 #! namespace Singletons.Base
-#class_name SingletonBase
 extends Node
 
 const PLUGIN_EXPORTED = false
@@ -180,8 +179,7 @@ func _init(node:Node=null):
 
 ## Implement in extended classes
 
-#extends SingletonBase
-#const SingletonBase = Singletons.Base
+#extends Singletons.Base # if class_name, use absolute path
 
 # Use 'PE_STRIP_CAST_SCRIPT' to auto strip type casts with plugin exporter, if the class is not a global name
 #const PE_STRIP_CAST_SCRIPT = preload("this_file")

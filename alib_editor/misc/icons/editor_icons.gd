@@ -1,6 +1,5 @@
 #! namespace ALibEditor.Singleton class EditorIcons
-extends SingletonBase
-const SingletonBase = Singletons.Base
+extends Singletons.Base
 
 const UTexture = preload("uid://ddu76iygjkxih") #! resolve ALibRuntime.Utils.UTexture
 

@@ -1,6 +1,5 @@
 #! namespace Singletons.RefCount
-extends SingletonBase
-const SingletonBase = Singletons.Base
+extends Singletons.Base
 
 
 static func _get_singleton_type() -> SingletonType:
@@ -49,8 +48,7 @@ func _init(node):
 
 ## Implement in extended classes
 
-#extends SingletonRefCount
-#const SingletonRefCount = Singletons.RefCount
+#extends Singletons.RefCount # if the class is not global class else do script path
 
 # Use 'PE_STRIP_CAST_SCRIPT' to auto strip type casts with plugin exporter, if the class is not a global name
 #const PE_STRIP_CAST_SCRIPT = preload("this_file")

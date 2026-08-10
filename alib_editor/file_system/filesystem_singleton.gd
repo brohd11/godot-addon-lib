@@ -1,7 +1,6 @@
 @tool
 class_name FileSystemSingleton
-extends SingletonRefCount
-const SingletonRefCount = Singletons.RefCount
+extends "res://addons/addon_lib/brohd/singleton/singleton_ref_count.gd" #! ext Singletons.RefCount
 
 const CacheHelper = preload("res://addons/addon_lib/brohd/alib_runtime/cache_helper/cache_helper.gd")
 const UTree = preload("res://addons/addon_lib/brohd/alib_runtime/utils/u_tree.gd")

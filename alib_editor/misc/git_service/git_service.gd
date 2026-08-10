@@ -1,6 +1,5 @@
 class_name GitService
-extends SingletonRefCount
-const SingletonRefCount = Singletons.RefCount
+extends "res://addons/addon_lib/brohd/singleton/singleton_ref_count.gd" #! ext Singletons.RefCount
 
 ## Headless git data provider, shared across consumers (the git panel, the diff gutter, and — later —
 ## the file tree and a standalone line-diff plugin).

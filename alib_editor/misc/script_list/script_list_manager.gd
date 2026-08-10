@@ -1,6 +1,5 @@
 #! namespace ALibEditor.Singleton class ScriptListManager
-extends SingletonBase
-const SingletonBase = Singletons.Base
+extends Singletons.Base
 
 const _STABLE_TARGET := 8
 const _TIMEOUT_MS := 5000
