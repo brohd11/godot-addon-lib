@@ -1,4 +1,4 @@
-const NUTree = ALibRuntime.NodeUtils.NUTree
+const NUTree = preload("uid://coqq638olix8k") #! resolve ALibRuntime.NodeUtils.NUTree
 const FSTreeHelper = preload("res://addons/addon_lib/brohd/alib_editor/file_system/util/fs_tree_helper.gd")
 
 var original_file_name = ""

@@ -4,6 +4,8 @@ extends "res://addons/addon_lib/brohd/singleton/singleton_base.gd" #! ext Single
 const PluginSplitPanel = preload("res://addons/addon_lib/brohd/alib_editor/editor_panel/plugin_split_panel.gd")
 const PluginTabContainer = preload("res://addons/addon_lib/brohd/alib_editor/editor_panel/plugin_tab_container.gd")
 
+const UResource = preload("uid://72uu8yngsoht") #! resolve ALibRuntime.Utils.UResource
+
 # Use 'PE_STRIP_CAST_SCRIPT' to auto strip type casts with plugin exporter, if the class is not a global name
 const PE_STRIP_CAST_SCRIPT = preload("res://addons/addon_lib/brohd/alib_editor/editor_panel/panel_singleton.gd")
 static func get_singleton_name() -> String:
@@ -171,10 +173,10 @@ func get_instanced_panels_and_tabs():
 	for inst:PluginSplitPanel in _split_panel_instances:
 		for panel:PluginSplitPanel.MoveablePanel in inst.get_panels():
 			var content = panel.get_control()
-			instances.append(ALibRuntime.Utils.UResource.get_object_file_path(content))
+			instances.append(UResource.get_object_file_path(content))
 			if content is PluginTabContainer:
 				for tab in content.get_all_tab_controls():
-					instances.append(ALibRuntime.Utils.UResource.get_object_file_path(tab))
+					instances.append(UResource.get_object_file_path(tab))
 	return instances
 
 

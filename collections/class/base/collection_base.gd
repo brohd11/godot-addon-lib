@@ -1,7 +1,7 @@
 @tool
 extends Resource
 
-const UFile = ALibRuntime.Utils.UFile
+const UFile = preload("uid://gs632l1nhxaf") #! resolve ALibRuntime.Utils.UFile
 
 @export var _collection_name:String="untitled"
 @export var _collection_data:= {}

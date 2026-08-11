@@ -7,7 +7,7 @@ extends "res://addons/addon_lib/brohd/singleton/singleton_ref_count.gd" #! ext S
 
 #region SingletonAPI
 
-const PE_STRIP_CAST_SCRIPT = preload("res://addons/addon_lib/brohd//alib_editor/misc/git_service/git_service.gd")
+const PE_STRIP_CAST_SCRIPT = preload("res://addons/addon_lib/brohd/alib_editor/misc/git_service/git_service.gd")
 
 static func get_singleton_name() -> String:
 	return "GitService"
@@ -40,9 +40,9 @@ func _get_ready_bool() -> bool:
 
 const SettingHelper = preload("uid://c4l4v4eufkmtx") #! resolve ALibEditor.Settings.SettingHelperEditor
 
-const GitUtil = preload("res://addons/addon_lib/brohd//alib_editor/misc/git_service/git_util.gd")
-const GitDiff = preload("res://addons/addon_lib/brohd//alib_editor/misc/git_service/git_diff.gd")
-const GlyphIcons = preload("res://addons/addon_lib/brohd//alib_editor/misc/git_service/glyph_icons.gd")
+const GitUtil = preload("res://addons/addon_lib/brohd/alib_editor/misc/git_service/git_util.gd")
+const GitDiff = preload("res://addons/addon_lib/brohd/alib_editor/misc/git_service/git_diff.gd")
+const GlyphIcons = preload("res://addons/addon_lib/brohd/alib_editor/misc/git_service/glyph_icons.gd")
 const GitDataDraw = preload("res://addons/addon_lib/brohd/alib_editor/misc/git_service/git_data_draw.gd")
 
 const MAIN_REPO = "res://"

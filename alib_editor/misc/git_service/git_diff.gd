@@ -1,7 +1,7 @@
 ## line-based diff helpers shared by git and the editor.
 ## keeps local hunks in `GitUtil.Keys` shape.
 
-const GitUtil = preload("res://addons/addon_lib/brohd//alib_editor/misc/git_service/git_util.gd")
+const GitUtil = preload("res://addons/addon_lib/brohd/alib_editor/misc/git_service/git_util.gd")
 
 const CONTEXT = 3
 

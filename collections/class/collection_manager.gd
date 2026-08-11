@@ -1,6 +1,7 @@
 
 const CollectionBase = preload("res://addons/addon_lib/brohd/collections/class/base/collection_base.gd")
 
+const Confirmation = preload("uid://b4rwv7tgks0b5") #! resolve ALibRuntime.Dialog.Handlers.Confirmation
 
 var collections_dir = "user://addons/collections/"
 var collections:= {}
@@ -83,7 +84,7 @@ func save_all_collections():
 
 func erase_collection(collection:CollectionBase):
 	var collection_name = collection.get_collection_name()
-	var conf = ALibRuntime.Dialog.Handlers.Confirmation.new("Delete collection: %s" % collection_name)
+	var conf = Confirmation.new("Delete collection: %s" % collection_name)
 	var handled = await conf.handled
 	if not handled:
 		return

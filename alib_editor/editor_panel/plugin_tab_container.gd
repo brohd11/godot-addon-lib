@@ -4,7 +4,11 @@ extends Control
 #! import_p Keys,
 
 const RightClickHandler = preload("res://addons/addon_lib/brohd/gui_click_handler/right_click_handler.gd")
-const UFile = ALibRuntime.Utils.UFile
+const UFile = preload("uid://gs632l1nhxaf") #! resolve ALibRuntime.Utils.UFile
+const EditorIcons = preload("uid://viocyrti6wce") #! resolve ALibEditor.Singleton.EditorIcons
+const UResource = preload("uid://72uu8yngsoht") #! resolve ALibRuntime.Utils.UResource
+const UWindow = preload("uid://q2lbynew21er") #! resolve ALibRuntime.Utils.UWindow
+const LineSubmit = preload("uid://dmilkaqawd510") #! resolve ALibRuntime.Dialog.Handlers.LineSubmit
 
 static func get_scene_path():
 	return "uid://2dvub2jcbmvm" #! ensure-path
@@ -74,7 +78,7 @@ func get_split_options() -> RightClickHandler.Options:
 		options = RightClickHandler.Options.new()
 	
 	var msg_text = "Hide Tab Bar" if tab_v.visible else "Show Tab Bar"
-	var icon = ALibEditor.Singleton.EditorIcons.get_visibility_icon(tab_v.visible)
+	var icon = EditorIcons.get_visibility_icon(tab_v.visible)
 	var val = not tab_v.visible
 	
 	options.add_option(msg_text, _toggle_tab_bar.bind(val), [icon])
@@ -142,7 +146,7 @@ func get_dock_data():
 		else:
 			tab_data[Keys.DATA_TAB_DATA] = {}
 		
-		var path = ALibRuntime.Utils.UResource.get_object_file_path(tab_control)
+		var path = UResource.get_object_file_path(tab_control)
 		tab_data[Keys.DATA_TAB_FILE_PATH] = path
 		tab_data[Keys.DATA_TAB_UID] = UFile.path_to_uid(path)
 		
@@ -217,8 +221,8 @@ func _show_tab(tab:int):
 func _rename_tab(tab:int):
 	var old_name = tab_bar.get_tab_title(tab)
 	var rect = tab_bar.get_tab_rect(tab)
-	rect.position += ALibRuntime.Utils.UWindow.get_control_absolute_position(tab_bar)
-	var line = ALibRuntime.Dialog.Handlers.LineSubmit.new(self, rect, false)
+	rect.position += UWindow.get_control_absolute_position(tab_bar)
+	var line = LineSubmit.new(self, rect, false)
 	
 	var new = await line.line_submitted
 	if new == old_name or new == "":

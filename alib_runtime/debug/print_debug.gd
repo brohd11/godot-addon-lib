@@ -1,6 +1,6 @@
 #! namespace ALibRuntime class DebugPrint
 
-const PRINT_DEBUG = true
+const PRINT_DEBUG = false
 
 #! arg_location section:S
 static func print_deb(section:Variant, ...msg:Array):

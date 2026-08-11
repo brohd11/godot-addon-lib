@@ -5,6 +5,7 @@ const PluginSplitPanel = preload("res://addons/addon_lib/brohd/alib_editor/edito
 const RightClickHandler = preload("res://addons/addon_lib/brohd/gui_click_handler/right_click_handler.gd")
 const ClickState = preload("res://addons/addon_lib/brohd/gui_click_handler/click_state.gd")
 const UFile = preload("uid://gs632l1nhxaf") #! resolve ALibRuntime.Utils.UFile
+const UResource = preload("uid://72uu8yngsoht") #! resolve ALibRuntime.Utils.UResource
 const Margin = preload("uid://b5wdpe8qi1pqg") #! resolve ALibEditor.UIHelpers.Margin
 
 const ThemeColor = preload("uid://dsukbd2hmebmw") #! resolve ALibEditor.Utils.UEditorTheme.ThemeColor
@@ -338,7 +339,7 @@ func _serialize_node(node: Control) -> Dictionary:
 		data[Keys.TYPE] = Keys.TYPE_PANEL
 		if node.get_child_count() > 0:
 			var control = node.get_control()
-			var path = ALibRuntime.Utils.UResource.get_object_file_path(control)
+			var path = UResource.get_object_file_path(control)
 			if path:
 				data[Keys.CONTENT_PATH] = path
 				var uid = UFile.path_to_uid(path)
@@ -383,7 +384,7 @@ func _deserialize_node(data: Dictionary, parent: Control):
 		else:
 			path = UFile.uid_to_path(path)
 		if path != "":
-			var scene = ALibRuntime.Utils.UResource.instance_scene_or_script(path)
+			var scene = UResource.instance_scene_or_script(path)
 			if scene:
 				p.add_control(scene)
 				if panel_dock_data and scene.has_method(Keys.METHOD_SET_DOCK_DATA):
@@ -462,7 +463,7 @@ func _on_picker_clicked(panel:MoveablePanel):
 
 
 func _on_picker_option_picked(panel:MoveablePanel, path:String):
-	var control = ALibRuntime.Utils.UResource.instance_scene_or_script(path)
+	var control = UResource.instance_scene_or_script(path)
 	if control == null:
 		return
 	panel.add_control(control)
@@ -480,15 +481,15 @@ func _on_editor_theme_changed():
 func _create_style_boxes():
 	var ed_scale = EditorInterface.get_editor_scale()
 	_style_box_h = StyleBoxFlat.new()
-	_style_box_h.bg_color = ALibEditor.Utils.UEditorTheme.ThemeColor.get_theme_color(ALibEditor.Utils.UEditorTheme.ThemeSetter.ThemeColor.Type.BACKGROUND)
-	_style_box_h.border_color = ALibEditor.Utils.UEditorTheme.ThemeColor.get_theme_color(ALibEditor.Utils.UEditorTheme.ThemeSetter.ThemeColor.Type.BASE)
+	_style_box_h.bg_color = ThemeColor.get_theme_color(ThemeColor.Type.BACKGROUND)
+	_style_box_h.border_color = ThemeColor.get_theme_color(ThemeColor.Type.BASE)
 	_style_box_h.border_width_left = 4 * ed_scale
 	_style_box_h.border_width_right = 4 * ed_scale
 	#_style_box_h.expand_margin_top = 6
 	
 	_style_box_v = StyleBoxFlat.new()
-	_style_box_v.bg_color = ALibEditor.Utils.UEditorTheme.ThemeColor.get_theme_color(ALibEditor.Utils.UEditorTheme.ThemeSetter.ThemeColor.Type.BACKGROUND)
-	_style_box_v.border_color = ALibEditor.Utils.UEditorTheme.ThemeColor.get_theme_color(ALibEditor.Utils.UEditorTheme.ThemeSetter.ThemeColor.Type.BASE)
+	_style_box_v.bg_color = ThemeColor.get_theme_color(ThemeColor.Type.BACKGROUND)
+	_style_box_v.border_color = ThemeColor.get_theme_color(ThemeColor.Type.BASE)
 	_style_box_v.border_width_top = 4 * ed_scale
 	_style_box_v.border_width_bottom = 4 * ed_scale
 	#_style_box_v.expand_margin_top = 6

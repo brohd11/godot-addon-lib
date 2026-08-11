@@ -308,7 +308,7 @@ func _process_custom_item(file_path:String, tree_item:TreeItem):
 	
 
 func _refresh_tree():
-	var t = ALibRuntime.Utils.UProfile.TimeFunction.new("refresh tree--" + root_dir)
+	#var t = ALibRuntime.Utils.UProfile.TimeFunction.new("refresh tree--" + root_dir)
 	var item:TreeItem = file_tree.get_root()
 	if not is_instance_valid(item):
 		return
@@ -324,7 +324,7 @@ func _refresh_tree():
 		item = item.get_next_in_tree()
 	
 	
-	t.stop()
+	#t.stop()
 
 ## Receive the leaf item of the tree. Custom processing on a refresh
 func _process_custom_item_refresh(file_path:String, tree_item:TreeItem):

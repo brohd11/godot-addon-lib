@@ -1,7 +1,7 @@
 @tool
 extends "res://addons/addon_lib/brohd/alib_runtime/dialog/base/handler_base.gd"
 
-const NUMarginContainer = ALibRuntime.NodeUtils.NUMarginContainer
+const NUMarginContainer = preload("uid://t8ajrsqdbrva") #! resolve ALibRuntime.NodeUtils.NUMarginContainer
 
 const SUCCESS_STRING = &"SUCCESS_STRING"
 

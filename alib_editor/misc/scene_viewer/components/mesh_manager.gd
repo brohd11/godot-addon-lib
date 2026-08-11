@@ -1,6 +1,10 @@
 @tool
 extends Node3D
 
+const UNode = preload("uid://dsywt12xnn7oh") #! resolve ALibRuntime.Utils.UNode
+const UPackedScene = preload("uid://44xrh5kbrpaa") #! resolve ALibRuntime.Utils.UResource.UPackedScene
+
+
 const SCENE_EXTENSIONS = ["tscn", "scn", "glb", "gltf", "fbx"]
 
 var decal_preview:Mesh
@@ -161,9 +165,9 @@ func _process_scene(path):
 	var ins = scene_data.get(Keys.INSTANCE)
 	var scn_aabb:AABB
 
-	var has_mesh = is_instance_valid(ALibRuntime.Utils.UNode.find_first_node_of_type(ins, MeshInstance3D))
+	var has_mesh = is_instance_valid(UNode.find_first_node_of_type(ins, MeshInstance3D))
 	if has_mesh:
-		scn_aabb = ALibRuntime.Utils.UResource.UPackedScene.get_scene_aabb(ins)
+		scn_aabb = UPackedScene.get_scene_aabb(ins)
 		scene_data[Keys.SCN_AABB] = scn_aabb
 	
 	elif ins is Decal:
@@ -176,7 +180,7 @@ func _process_scene(path):
 		scene_data[Keys.SCN_AABB] = scn_aabb
 		ins.add_child(new_mesh)
 	
-	var collision_shapes = ALibRuntime.Utils.UNode.get_all_nodes_of_type(ins, CollisionShape3D)
+	var collision_shapes = UNode.get_all_nodes_of_type(ins, CollisionShape3D)
 	if not collision_shapes.is_empty():
 		scene_data[Keys.COLLISION] = collision_shapes
 	for col_shape:CollisionShape3D in collision_shapes:
@@ -269,10 +273,10 @@ func toggle_collision_shapes():
 			c.visible = collision_shapes_toggled
 
 func _get_mesh_nodes(scn_ins):
-	return ALibRuntime.Utils.UNode.get_all_nodes_of_type(scn_ins, MeshInstance3D)
+	return UNode.get_all_nodes_of_type(scn_ins, MeshInstance3D)
 
 func _get_collision_nodes(scn_ins):
-	return ALibRuntime.Utils.UNode.get_all_nodes_of_type(scn_ins, CollisionShape3D)
+	return UNode.get_all_nodes_of_type(scn_ins, CollisionShape3D)
 
 func get_active_scene_instance():
 	return _scene_cache.get(current_scene, {}).get(Keys.INSTANCE)
@@ -284,7 +288,7 @@ func get_scene_instance(path:String):
 	return _scene_cache.get(path, {}).get(Keys.INSTANCE)
 
 func get_current_scene_stats(scene:Node3D):
-	var m = ALibRuntime.Utils.UNode.find_first_node_of_type(scene, MeshInstance3D)
+	var m = UNode.find_first_node_of_type(scene, MeshInstance3D)
 	if not m:
 		return {}
 	var mesh:MeshInstance3D = m

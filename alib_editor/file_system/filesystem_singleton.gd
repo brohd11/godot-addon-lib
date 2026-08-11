@@ -99,6 +99,7 @@ func _on_editor_node_ref_ready():
 	rebuild_files()
 	
 	_generate_previews() # init set in here so all previews generated at start
+	_init_complete = true
 
 
 
@@ -116,7 +117,7 @@ func _generate_previews():
 	while _preview_balance > 0:
 		await get_tree().process_frame
 	_previews_generated = true
-	_init_complete = true
+	filesystem_paths_changed.emit(false)
 
 func _set_interface_refs():
 	cache.set_folder_icon()
