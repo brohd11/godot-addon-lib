@@ -267,6 +267,12 @@ static func _status_display(file_data:Dictionary, table:Dictionary, untracked:St
 	var index:Status = file_data.get(Keys.INDEX, Status.NONE)
 	return table.get(worktree if worktree != Status.NONE else index, unknown)
 
+const EXEC_FAILED = -1
+
+const PATCH_TMP_DIR = "user://git_service"
+
+static var _warned_no_git:bool = false
+
 #! keys exit:int output:Array
 static func run_git(repo_dir:String, args:Array, read_stderr:=false) -> Dictionary:
 	var final_args:Array = ["-C", ProjectSettings.globalize_path(repo_dir)]
@@ -274,10 +280,66 @@ static func run_git(repo_dir:String, args:Array, read_stderr:=false) -> Dictiona
 
 	var output = []
 	var exit_code = OS.execute("git", final_args, output, read_stderr)
+	if exit_code == EXEC_FAILED and not _warned_no_git:
+		_warned_no_git = true # racy across worker threads, but the worst case is a repeated error
+		push_error("GitService: could not run `git` — is it installed and on PATH?")
 	return {
 		Keys.EXIT: exit_code,
 		Keys.OUTPUT: output,
 	}
+
+
+## Runs a diff and reads its output back off disk instead of the pipe. Windows decodes child
+## output with the ANSI code page, which mangles every non-ASCII byte git writes; `--output=`
+## hands us a file, and FileAccess reads that as the UTF-8 it actually is.
+#! keys exit:int text:String
+static func run_git_to_file(repo_dir:String, args:Array, tag:String) -> Dictionary:
+	var tmp_path = PATCH_TMP_DIR.path_join("%d_%s.patch" % [OS.get_thread_caller_id(), tag])
+	DirAccess.make_dir_recursive_absolute(PATCH_TMP_DIR)
+
+	var final_args = args.duplicate()
+	final_args.insert(1, "--output=" + ProjectSettings.globalize_path(tmp_path)) # before any `--`
+
+	var result = run_git(repo_dir, final_args)
+
+	var text = FileAccess.get_file_as_string(tmp_path) if FileAccess.file_exists(tmp_path) else ""
+	DirAccess.remove_absolute(tmp_path)
+
+	return {
+		Keys.EXIT: result[Keys.EXIT],
+		Keys.TEXT: text,
+	}
+
+
+static func to_lines(text:String) -> PackedStringArray:
+	return text.replace("\r\n", "\n").replace("\r", "\n").split("\n")
+
+
+## Rebuilds a patch's pre-image from its post-image, so the HEAD copy of a file can be recovered
+## without ever asking git to stream blob bytes back through the pipe.
+static func reverse_apply(new_lines:PackedStringArray, hunks:Array) -> PackedStringArray:
+	var out := PackedStringArray()
+	var cursor = 0
+
+	for hunk:Dictionary in hunks:
+		var new_count:int = hunk[Keys.NEW_COUNT]
+		var start:int = hunk[Keys.NEW_START]
+		if new_count != 0:
+			start -= 1 # 1-based over the lines it covers; already the gap index when it covers none
+
+		for i in range(cursor, mini(start, new_lines.size())):
+			out.append(new_lines[i])
+
+		for entry:Dictionary in hunk[Keys.LINES]:
+			if entry[Keys.ORIGIN] != "+":
+				out.append(entry[Keys.TEXT])
+
+		cursor = maxi(cursor, start + new_count)
+
+	for i in range(mini(cursor, new_lines.size()), new_lines.size()):
+		out.append(new_lines[i])
+
+	return out
 
 
 static func is_repo(dir_path:String) -> bool:
@@ -318,8 +380,9 @@ static func find_repo_for(path:String, repos:Array) -> String:
 
 
 static func get_status(repo_dir:String) -> Dictionary:
+	# quotepath stays on (git's default) so non-ASCII paths arrive as ASCII \nnn escapes that
+	# _unquote_path decodes itself — Windows would otherwise mis-decode the raw UTF-8 bytes
 	var result = run_git(repo_dir, [
-		"-c", "core.quotepath=false",
 		"status", "--porcelain=v2", "--branch", "--untracked-files=all",
 		"--ignored=matching",
 	])
@@ -358,19 +421,22 @@ static func attach_diffs(repo_dir:String, status:Dictionary) -> void:
 	_merge_patch(repo_dir, files, ["--cached"], Keys.HUNKS_STAGED) # index vs HEAD
 
 
+const DIFF_ARGS:Array = ["--patch", "--no-ext-diff", "--no-color", "--no-textconv"]
+
 static func _merge_patch(repo_dir:String, files:Dictionary, extra_args:Array, hunks_key:StringName) -> void:
-	var args = ["-c", "core.quotepath=false", "diff", "--patch"]
+	var args = ["diff"]
+	args.append_array(DIFF_ARGS)
 	args.append_array(extra_args)
 
-	var result = run_git(repo_dir, args)
+	var result = run_git_to_file(repo_dir, args, hunks_key)
 	if result[Keys.EXIT] != 0:
 		return
 
-	var output:Array = result[Keys.OUTPUT]
-	if output.is_empty():
+	var text:String = result[Keys.TEXT]
+	if text.is_empty():
 		return
 
-	var patch = parse_patch(String(output[0]), repo_dir)
+	var patch = parse_patch(text, repo_dir)
 	for res_path:String in patch:
 		if not files.has(res_path):
 			continue # a path in the diff but not in the status: nothing to hang it off
@@ -389,8 +455,8 @@ enum Head {
 	IGNORED,
 }
 
-static func build_show_args(rev:String, repo_dir:String, res_path:String) -> Array:
-	return ["show", "%s:%s" % [rev, to_repo_path(repo_dir, res_path)]]
+static func build_exists_args(rev:String, repo_dir:String, res_path:String) -> Array:
+	return ["cat-file", "-e", "%s:%s" % [rev, to_repo_path(repo_dir, res_path)]]
 
 
 static func build_check_ignore_args(repo_dir:String, res_path:String) -> Array:
@@ -401,18 +467,32 @@ static func is_ignored(repo_dir:String, res_path:String) -> bool:
 	return run_git(repo_dir, build_check_ignore_args(repo_dir, res_path))[Keys.EXIT] == 0
 
 
+## `git show <rev>:<path>` streams blob bytes straight to stdout and ignores `--output`, so it
+## cannot be read back safely. The file on disk is the diff's post-image and FileAccess decodes it
+## correctly everywhere, so reverse-applying `git diff HEAD` to it recovers the HEAD copy instead.
 #! keys head:Head text:String
 static func get_file_at_head(repo_dir:String, res_path:String) -> Dictionary:
-	var result = run_git(repo_dir, build_show_args(REV_HEAD, repo_dir, res_path))
-	if result[Keys.EXIT] == 0:
-		var output:Array = result[Keys.OUTPUT]
-		return {Keys.HEAD: Head.OK, Keys.TEXT: String(output[0]) if not output.is_empty() else ""}
-
-	if run_git(repo_dir, ["rev-parse", "--git-dir"])[Keys.EXIT] == 0:
+	if run_git(repo_dir, build_exists_args(REV_HEAD, repo_dir, res_path))[Keys.EXIT] != 0:
+		if run_git(repo_dir, ["rev-parse", "--git-dir"])[Keys.EXIT] != 0:
+			return {Keys.HEAD: Head.ERROR, Keys.TEXT: ""}
 		var head:Head = Head.IGNORED if is_ignored(repo_dir, res_path) else Head.ABSENT
 		return {Keys.HEAD: head, Keys.TEXT: ""}
 
-	return {Keys.HEAD: Head.ERROR, Keys.TEXT: ""}
+	var args:Array = ["diff", REV_HEAD]
+	args.append_array(DIFF_ARGS)
+	args.append_array(["--", to_pathspec(repo_dir, res_path)])
+
+	var result = run_git_to_file(repo_dir, args, "baseline")
+	if result[Keys.EXIT] != 0:
+		return {Keys.HEAD: Head.ERROR, Keys.TEXT: ""}
+
+	var file_data:Dictionary = parse_patch(result[Keys.TEXT], repo_dir).get(res_path, {})
+	if file_data.get(Keys.BINARY, false):
+		return {Keys.HEAD: Head.ERROR, Keys.TEXT: ""}
+
+	var disk_lines = to_lines(FileAccess.get_file_as_string(res_path))
+	var head_lines = reverse_apply(disk_lines, file_data.get(Keys.HUNKS, []))
+	return {Keys.HEAD: Head.OK, Keys.TEXT: "\n".join(head_lines)}
 
 
 static func get_log(repo_dir:String, limit:=LOG_LIMIT) -> Array[Dictionary]:
@@ -808,17 +888,19 @@ static func _to_res_path(repo_dir:String, rel_path:String) -> String:
 	return repo_dir.path_join(_unquote_path(rel_path))
 
 
+## Decodes git's C-quoting into bytes rather than codepoints: an escaped non-ASCII path arrives as
+## one \nnn per UTF-8 byte, so treating each as a character would mangle everything above ASCII.
 static func _unquote_path(path:String) -> String:
 	if not path.begins_with("\""):
 		return path
 
 	path = path.substr(1, path.length() - 2)
 
-	var out = ""
+	var out := PackedByteArray()
 	var i = 0
 	while i < path.length():
 		if path[i] != "\\":
-			out += path[i]
+			out.append_array(path[i].to_utf8_buffer())
 			i += 1
 			continue
 
@@ -829,22 +911,26 @@ static func _unquote_path(path:String) -> String:
 		var escaped = path[i]
 		i += 1
 		match escaped:
-			"n": out += "\n"
-			"t": out += "\t"
-			"r": out += "\r"
-			"\"": out += "\""
-			"\\": out += "\\"
+			"a": out.append(0x07)
+			"b": out.append(0x08)
+			"t": out.append(0x09)
+			"n": out.append(0x0a)
+			"v": out.append(0x0b)
+			"f": out.append(0x0c)
+			"r": out.append(0x0d)
+			"\"": out.append(0x22)
+			"\\": out.append(0x5c)
 			_:
 				if escaped >= "0" and escaped <= "7": # \nnn, an octal byte
 					var code = 0
 					for digit in escaped + path.substr(i, 2):
 						code = code * 8 + (digit.unicode_at(0) - 48)
 					i += 2
-					out += char(code)
+					out.append(code & 0xff)
 				else:
-					out += escaped
+					out.append_array(escaped.to_utf8_buffer())
 
-	return out
+	return out.get_string_from_utf8()
 
 
 #region Commands

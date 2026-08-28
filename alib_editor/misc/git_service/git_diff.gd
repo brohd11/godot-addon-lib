@@ -14,8 +14,9 @@ enum _Op {
 }
 
 
+## lives in GitUtil so get_file_at_head() can reach it without a cyclic preload
 static func to_lines(text:String) -> PackedStringArray:
-	return text.replace("\r\n", "\n").replace("\r", "\n").split("\n")
+	return GitUtil.to_lines(text)
 
 
 static func diff_lines(old_lines:PackedStringArray, new_lines:PackedStringArray,
