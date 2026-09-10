@@ -5,11 +5,11 @@ extends Node
 #! import_p Keys,
 #! import_show_global DockManager,
 
-const UFile = preload("uid://gs632l1nhxaf") #! resolve ALibRuntime.Utils.UFile
+const UFile = preload("uid://bl33psa06nv1e") #! resolve ALibRuntime.Utils.UFile.Methods
 const UName = preload("uid://e2t8o184os5r") #! resolve ALibRuntime.Utils.UName
 const UVersion = preload("uid://b4f7kxqukmbj2") #! resolve ALibRuntime.Utils.UVersion
 const UWindow = preload("uid://q2lbynew21er") #! resolve ALibRuntime.Utils.UWindow
-const UResource = preload("uid://72uu8yngsoht") #! resolve ALibRuntime.Utils.UResource
+const UResourceMethods = preload("uid://brjrqxh2smivn") #! resolve ALibRuntime.Utils.UResource.Methods
 const ThemeColor = preload("uid://dsukbd2hmebmw") #! resolve ALibEditor.Utils.UEditorTheme.ThemeColor
 
 const DockPopupHandler = preload("res://addons/addon_lib/brohd/dock_manager/dock_popup/dock_popup_handler.gd")
@@ -637,7 +637,7 @@ func get_docked_name():
 	return _name
 
 static func get_scene_or_script(control):
-	return UResource.get_object_file_path(control)
+	return UResourceMethods.get_object_file_path(control)
 
 static func _plugin_has_main_screen(_plugin:EditorPlugin):
 	return _plugin.has_method("_has_main_screen")

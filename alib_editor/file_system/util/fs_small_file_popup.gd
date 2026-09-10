@@ -1,6 +1,6 @@
 #! namespace ALibEditor.FileSystem.Component class SmallPopup
 
-const UFile = preload("uid://gs632l1nhxaf") #! resolve ALibRuntime.Utils.UFile
+const UFile = preload("uid://bl33psa06nv1e") #! resolve ALibRuntime.Utils.UFile.Methods
 const Options = preload("uid://c61qxuau2v0pb") #! resolve ALibRuntime.Popups.Options
 
 const SCRIPT_TABS_NAME = "ScriptTabSingleton"

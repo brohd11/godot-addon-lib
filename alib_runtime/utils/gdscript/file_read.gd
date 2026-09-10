@@ -1,6 +1,6 @@
 
-const UFile = preload("uid://gs632l1nhxaf") # u_file.gd
-const UString = preload("uid://cwootkivqiwq1") # u_string.gd
+const UFile = preload("uid://bl33psa06nv1e") #! resolve ALibRuntime.Utils.UFile.Methods
+const UString = preload("uid://bbk1yedqm7a6a") #! resolve ALibRuntime.Utils.UString.Methods
 
 static func get_class_name(path:String):
 	var file = UFile.get_file_access(path)

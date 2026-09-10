@@ -3,13 +3,10 @@
 
 
 static func confirm(message_text:String, dialog_parent=null) -> bool:
-	var handler = Handlers.Confirmation.new(message_text, dialog_parent)
-	return await handler.handled
+	return await Handlers.Confirmation.confirm(message_text, dialog_parent)
 
 static func acknowledge(message_text:String, dialog_parent=null):
-	var handler = Handlers.Confirmation.new(message_text, dialog_parent)
-	handler.is_acknowledge()
-	return await handler.handled
+	return await Handlers.Confirmation.acknowledge(message_text, dialog_parent)
 
 
 class Handlers:

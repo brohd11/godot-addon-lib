@@ -2,12 +2,12 @@
 #const FSClasses = preload("res://addons/addon_lib/brohd/alib_editor/file_system/util/fs_classes.gd")
 #const FSUtil = preload("uid://c7yf322tn6f0b") #! resolve FSClasses.FSUtil
 
-const UFile = preload("uid://gs632l1nhxaf") #! resolve ALibRuntime.Utils.UFile
-const UResource = preload("uid://72uu8yngsoht") #! resolve ALibRuntime.Utils.UResource
-const UGDScript = preload("uid://bqwb564jwff43") #! resolve ALibRuntime.Utils.UGDScript
-const UPackedScene = UResource.UPackedScene
-const ImageSize = UResource.ImageSize
-const Audio = UResource.Audio
+const UFile = preload("uid://bl33psa06nv1e") #! resolve ALibRuntime.Utils.UFile.Methods
+const UResourceMethods = preload("uid://brjrqxh2smivn") #! resolve ALibRuntime.Utils.UResource.Methods
+const GDFileRead = preload("uid://ms6j4bx7vbdr") #! resolve ALibRuntime.Utils.UGDScript.FileRead
+const UPackedScene = preload("uid://44xrh5kbrpaa") #! resolve ALibRuntime.Utils.UResource.UPackedScene
+const ImageSize = preload("uid://d0ld4o3cihtgv") #! resolve ALibRuntime.Utils.UResource.ImageSize
+const Audio = preload("uid://dpo6b8yu8xpy2") #! resolve ALibRuntime.Utils.UResource.Audio
 
 
 static func get_custom_tooltip(path: String) -> Object:
@@ -85,7 +85,7 @@ static func _get_file_specific_details(path:String):
 	var label_text = ""
 	var ext = path.get_extension()
 	if ext == "tres":
-		var custom_type = UResource.get_resource_script_class(path)
+		var custom_type = UResourceMethods.get_resource_script_class(path)
 		if custom_type:
 			label_text += "\nScript Class: %s" % custom_type
 		
@@ -101,16 +101,16 @@ static func _get_file_specific_details(path:String):
 			label_text += inh_text
 		
 	elif ext == "gd":
-		var _class = UGDScript.FileRead.get_class_name(path)
+		var _class = GDFileRead.get_class_name(path)
 		if _class:
 			label_text += "\nClass Name: %s" % _class
 		
-		var _extends = UGDScript.FileRead.get_extends(path)
+		var _extends = GDFileRead.get_extends(path)
 		if not _extends:
 			_extends = "RefCounted"
 		label_text += "\nExtends: %s" % _extends
 		
-		if UGDScript.FileRead.get_is_tool(path):
+		if GDFileRead.get_is_tool(path):
 			label_text += "\nTool Script"
 		
 	

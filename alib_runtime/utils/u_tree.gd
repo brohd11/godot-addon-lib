@@ -1,6 +1,6 @@
 #! namespace ALibRuntime.Utils class UTree
 
-const UString = preload("uid://cwootkivqiwq1") # u_string.gd
+const Filter = preload("uid://b1j5snv8mpgob") #! resolve ALibRuntime.Utils.UString.Filter
 
 static func get_all_children_items(tree_item:TreeItem) -> Array[TreeItem]:
 	return _get_all_children_items(tree_item)
@@ -27,7 +27,7 @@ static func _get_all_children_items(tree_item:TreeItem, limit_to_visible:=false)
 static func check_filter(text:String, filter_text:String) -> bool:
 	if filter_text == "":
 		return true # true == don't hide
-	return UString.Filter.Check.contains_n(text, [filter_text])
+	return Filter.Check.contains_n(text, [filter_text])
 	#text = text.to_lower()
 	#if text.find(filter_text) > -1:
 		#return true
@@ -38,7 +38,7 @@ static func check_filter_split(text:String, filter_text:String) -> bool:
 		return true # true == don't hide
 	#text = text.to_lower()
 	var f_split := filter_text.split(" ", false)
-	return UString.Filter.Check.contains_n(text, f_split)
+	return Filter.Check.contains_n(text, f_split)
 	#for s in f_split:
 		#if text.find(s) == -1:
 			#return false

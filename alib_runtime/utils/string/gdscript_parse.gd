@@ -1,6 +1,6 @@
 
-const UFile = preload("uid://gs632l1nhxaf") #! resolve ALibRuntime.Utils.UFile
-const UString = preload("uid://cwootkivqiwq1") #! resolve ALibRuntime.Utils.UString
+const UFile = preload("uid://bl33psa06nv1e") #! resolve ALibRuntime.Utils.UFile.Methods
+const UString = preload("uid://bbk1yedqm7a6a") #! resolve ALibRuntime.Utils.UString.Methods
 
 const _QUOTES = ["'", '"']
 

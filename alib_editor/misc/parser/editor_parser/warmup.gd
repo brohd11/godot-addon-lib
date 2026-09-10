@@ -15,7 +15,7 @@ extends RefCounted
 ## Non-blocking: drains WARMUP_PER_FRAME scripts per frame, awaiting a process_frame between batches.
 
 const GDScriptParser = preload("uid://c4465kdwgj042") #! resolve ALibRuntime.Utils.UGDScript.Parser
-const UFile = preload("uid://gs632l1nhxaf") #! resolve ALibRuntime.Utils.UFile
+const GetFiles = preload("uid://b3p6nfmpcltt0") #! resolve ALibRuntime.Utils.UFile.GetFiles
 const WARMUP_PER_FRAME := 3 # scripts resolved per frame before yielding (parse is heavy; keep small)
 
 var running := false
@@ -29,7 +29,7 @@ func run(cache_dir:String, tree:SceneTree, full:bool = false) -> void:
 	running = true
 
 	var cache:Dictionary = {} # shared across the sweep so dependency sub-parsers are reused
-	var paths:Array = UFile.GetFiles.scan("res://", ["gd"])
+	var paths:Array = GetFiles.scan("res://", ["gd"])
 	print("ParserWarmup: sweeping %d scripts (%s) -> %s" % [paths.size(), "full" if full else "shallow", cache_dir])
 
 	var warmed := 0

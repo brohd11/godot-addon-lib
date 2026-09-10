@@ -13,12 +13,14 @@ const FileSystem = preload("uid://dagr353kjvdrc") #! resolve ALibEditor.Nodes.Fi
 const PopupID = preload("uid://co1fsmkihc4cg") #! resolve ALibEditor.Nodes.FileSystem.PopupID
 
 const UVersion = preload("uid://b4f7kxqukmbj2") #! resolve ALibRuntime.Utils.UVersion
-const UFile = preload("uid://gs632l1nhxaf") #! resolve ALibRuntime.Utils.UFile
-const UResource = preload("uid://72uu8yngsoht") #! resolve ALibRuntime.Utils.UResource
+const UFile = preload("uid://bl33psa06nv1e") #! resolve ALibRuntime.Utils.UFile.Methods
+const GetFilesAsync = preload("uid://ctsugodrtg3rc") #! resolve ALibRuntime.Utils.UFile.GetFilesAsync
+const UResourceMethods = preload("uid://brjrqxh2smivn") #! resolve ALibRuntime.Utils.UResource.Methods
 const UGDScript = preload("uid://bqwb564jwff43") #! resolve ALibRuntime.Utils.UGDScript
 const UOs = preload("uid://cnuejrhrodgbx") #! resolve ALibRuntime.Utils.UOs
 const UTree = preload("uid://byxrrav3r3afw") #! resolve ALibRuntime.Utils.UTree
-const UString = preload("uid://cwootkivqiwq1") #! resolve ALibRuntime.Utils.UString
+const UString = preload("uid://bbk1yedqm7a6a") #! resolve ALibRuntime.Utils.UString.Methods
+const UStringFilter = preload("uid://b1j5snv8mpgob") #! resolve ALibRuntime.Utils.UString.Filter
 const UWindow = preload("uid://q2lbynew21er") #! resolve ALibRuntime.Utils.UWindow
 const UControl = preload("uid://brio73mirr5e6") #! resolve ALibRuntime.Utils.UControl
 

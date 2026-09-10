@@ -1,8 +1,7 @@
 extends Node
 
-const UString = preload("uid://cwootkivqiwq1") #! resolve ALibRuntime.Utils.UString
-const UResource = preload("uid://72uu8yngsoht") #! resolve ALibRuntime.Utils.UResource
-const PackedSceneReadFile = UResource.UPackedScene.ReadFile
+const UString = preload("uid://bbk1yedqm7a6a") #! resolve ALibRuntime.Utils.UString.Methods
+const PackedSceneReadFile = preload("uid://dr3oreheg7dr0") #! resolve ALibRuntime.Utils.UResource.UPackedScene.ReadFile
 
 const ScenePreviewViewport = preload("res://addons/addon_lib/brohd/preview_gen/scene_preview/scene_preview_viewport.gd")
 

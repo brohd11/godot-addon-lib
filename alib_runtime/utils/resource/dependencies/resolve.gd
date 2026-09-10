@@ -2,7 +2,7 @@
 ## a dead uid or an unresolvable relative path is reported as unresolved rather than
 ## silently becoming an empty dependency key.
 
-const UFile = preload("uid://gs632l1nhxaf") # u_file.gd
+const UFile = preload("uid://bl33psa06nv1e") #! resolve ALibRuntime.Utils.UFile.Methods
 
 const UID_PREFIX = "uid" + "://"
 

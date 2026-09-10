@@ -1,6 +1,17 @@
 @tool
 extends "res://addons/addon_lib/brohd/alib_runtime/dialog/base/handler_base.gd"
 
+
+static func confirm(message_text:String, dialog_parent=null) -> bool:
+	var handler = new(message_text, dialog_parent)
+	return await handler.handled
+
+static func acknowledge(message_text:String, dialog_parent=null):
+	var handler = new(message_text, dialog_parent)
+	handler.is_acknowledge()
+	return await handler.handled
+
+
 var cancel_button:Button
 
 func _init(dialog_text, _root_node=null) -> void:

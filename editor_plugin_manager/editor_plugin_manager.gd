@@ -4,7 +4,7 @@ extends RefCounted
 
 const PLUGIN_EXPORTED = false
 
-const UFile = preload("uid://gs632l1nhxaf") #! resolve ALibRuntime.Utils.UFile
+const UFile = preload("uid://bl33psa06nv1e") #! resolve ALibRuntime.Utils.UFile.Methods
 
 var plugin:EditorPlugin
 

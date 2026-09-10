@@ -1,4 +1,4 @@
-const UString = preload("uid://cwootkivqiwq1") # u_string.gd
+const UString = preload("uid://bbk1yedqm7a6a") #! resolve ALibRuntime.Utils.UString.Methods
 
 const BRACKETS = { "(": ")", "[": "]", "{": "}" }
 enum Mode {

@@ -1,5 +1,5 @@
 
-const UString = preload("uid://cwootkivqiwq1") #! resolve ALibRuntime.Utils.UString
+const UString = preload("uid://bbk1yedqm7a6a") #! resolve ALibRuntime.Utils.UString.Methods
 
 enum IncludeInheritance{
 	NONE,

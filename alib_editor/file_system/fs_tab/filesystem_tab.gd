@@ -7,6 +7,7 @@ const ATTEMPT_RENAME = true
 
 const RightClickHandler = FSUtil.RightClickHandler
 const UFile = FSUtil.UFile
+const GetFilesAsync = FSUtil.GetFilesAsync
 const UControl = FSUtil.UControl
 const EditorIcons = FSUtil.EditorIcons
 const CacheHelper = FSUtil.CacheHelper
@@ -97,7 +98,7 @@ var options_button:Button
 
 var _search_scope_button:Button
 
-var _async_search:UFile.GetFilesAsync
+var _async_search:GetFilesAsync
 var _search_tick:int = 1
 var _async_is_searching:= false
 var _current_search_dir:= ""
@@ -529,7 +530,7 @@ func _get_filtered_paths(include_dirs:=false, use_file_name:=true, filter_mode:=
 			paths = _async_search.get_cached_files()
 		else:
 			_async_is_searching = true
-			_async_search = UFile.GetFilesAsync.open(_current_search_dir, _search_async_callback)
+			_async_search = GetFilesAsync.open(_current_search_dir, _search_async_callback)
 			_async_search.set_settings(include_dirs)
 			paths = await _async_search.get_files(50)
 			_async_is_searching = false

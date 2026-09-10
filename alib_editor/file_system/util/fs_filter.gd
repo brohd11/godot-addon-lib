@@ -1,7 +1,7 @@
 const FSClasses = preload("res://addons/addon_lib/brohd/alib_editor/file_system/util/fs_classes.gd")
 const FSUtil = FSClasses.FSUtil
-const UResource = FSUtil.UResource
-const Filter = FSUtil.UString.Filter
+const UResourceMethods = FSUtil.UResourceMethods
+const Filter = FSUtil.UStringFilter
 
 enum FilterMode {
 	AUTO,
@@ -196,7 +196,7 @@ static func _type_match(to_filter:PackedStringArray, filter_text_array:PackedStr
 	return valid_paths
 
 static func _check_custom_resource(path:String, search_array:Array):
-	var _class_name = UResource.get_resource_script_class(path)
+	var _class_name = UResourceMethods.get_resource_script_class(path)
 	if _class_name == "":
 		return false
 	return Filter.Check.subsequence_n(_class_name, search_array)

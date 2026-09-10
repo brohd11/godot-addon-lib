@@ -1,4 +1,4 @@
-const UFile = preload("uid://gs632l1nhxaf") # u_file.gd
+const UFile = preload("uid://bl33psa06nv1e") #! resolve ALibRuntime.Utils.UFile.Methods
 const UNode = preload("uid://dsywt12xnn7oh") # u_node.gd
 
 const ReadFile = preload("res://addons/addon_lib/brohd/alib_runtime/utils/resource/packed_scene/read_file.gd")

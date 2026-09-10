@@ -4,7 +4,7 @@ extends Control
 const PluginSplitPanel = preload("res://addons/addon_lib/brohd/alib_editor/editor_panel/plugin_split_panel.gd")
 const RightClickHandler = preload("res://addons/addon_lib/brohd/gui_click_handler/right_click_handler.gd")
 const ClickState = preload("res://addons/addon_lib/brohd/gui_click_handler/click_state.gd")
-const UFile = preload("uid://gs632l1nhxaf") #! resolve ALibRuntime.Utils.UFile
+const UFile = preload("uid://bl33psa06nv1e") #! resolve ALibRuntime.Utils.UFile.Methods
 const UResource = preload("uid://72uu8yngsoht") #! resolve ALibRuntime.Utils.UResource
 const Margin = preload("uid://b5wdpe8qi1pqg") #! resolve ALibEditor.UIHelpers.Margin
 

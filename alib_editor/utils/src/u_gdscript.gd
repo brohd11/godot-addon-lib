@@ -1,6 +1,7 @@
 #! namespace ALibEditor.Utils class UGDScript
 
-const UString = preload("uid://cwootkivqiwq1") #! resolve ALibRuntime.Utils.UString
+const UString = preload("uid://bbk1yedqm7a6a") #! resolve ALibRuntime.Utils.UString.Methods
+const UStringToken = preload("uid://ckamjm80ocd1x") #! resolve ALibRuntime.Utils.UString.Token
 const UClassDetail = preload("uid://dpmubecadgfk8") #! resolve ALibRuntime.Utils.UGDScript.UClassDetail
 
 
@@ -13,7 +14,7 @@ enum ContextType {
 
 static func resolve_global_script(line:String, tokens=null, path_insert:='preload("%s")'):
 	if tokens == null:
-		tokens = UString.Token.tokenize_string(line, false)
+		tokens = UStringToken.tokenize_string(line, false)
 	var replace = false
 	for tok in tokens.tokens:
 		var front = UString.get_member_access_front(tok)
@@ -46,7 +47,7 @@ static func get_scripts_in_line(current_script:GDScript, line:String, tokens=nul
 static func _get_scripts_in_line(current_script:GDScript, line:String, tokens=null, only_global:=true):
 	var data = {}
 	if tokens == null:
-		tokens = UString.Token.tokenize_string(line, false)
+		tokens = UStringToken.tokenize_string(line, false)
 	
 	var preloads = UClassDetail.script_get_preloads(current_script)
 	for tok in tokens.tokens:

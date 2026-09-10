@@ -1,6 +1,6 @@
 
 const SELF = preload("uid://ctsugodrtg3rc") # get_files_async.gd
-const UFile = preload("uid://gs632l1nhxaf") # u_file.gd
+const UFile = preload("uid://bl33psa06nv1e") #! resolve ALibRuntime.Utils.UFile.Methods
 
 var _found_files:= PackedStringArray()
 

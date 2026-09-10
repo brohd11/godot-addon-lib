@@ -2,7 +2,7 @@
 ## "what does this need?" - both hold DepEdge instances, so the reference kind and line
 ## survive alongside the connection.
 
-const UFile = preload("uid://gs632l1nhxaf") # u_file.gd
+const UFile = preload("uid://bl33psa06nv1e") #! resolve ALibRuntime.Utils.UFile.Methods
 
 var path:String
 ## Resolved lazily - ResourceLoader lookups are not free and most callers never ask.
