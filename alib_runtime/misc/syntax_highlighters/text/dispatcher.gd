@@ -56,6 +56,8 @@ static func normalize(extension:String) -> String:
 		extension = extension.get_extension()
 	return extension.to_lower()
 
+static func supports(ext:String):
+	return EXTENSION_MAP.has(ext) or has_non_static_provider(ext)
 
 static func has_non_static_provider(ext:String):
 	var normalized = normalize(ext)
