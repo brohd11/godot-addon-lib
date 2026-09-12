@@ -70,6 +70,6 @@ static func get_non_static_provider(ext:String):
 	if not NON_STATIC_MAP.has(normalized):
 		return null
 	var provider = ResourceLoader.load(NON_STATIC_MAP[normalized], "GDScript") as GDScript
-	if provider == null or not provider.can_instantiate():
+	if provider == null:
 		return null
 	return provider.new()
