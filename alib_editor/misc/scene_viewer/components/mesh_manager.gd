@@ -216,7 +216,7 @@ func _set_label_settings(path:String, is_current:=false):
 	
 	
 	var ins = scene_data.get(Keys.INSTANCE)
-	var scn_label = ALibRuntime.Utils.UNode.find_first_node_of_type(ins, Label3D)
+	var scn_label = UNode.find_first_node_of_type(ins, Label3D)
 	if scn_label is Label3D:
 		if not show_labels:
 			scn_label.hide()

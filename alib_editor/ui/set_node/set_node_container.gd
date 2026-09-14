@@ -3,6 +3,8 @@ extends HBoxContainer
 
 const _NOT_VALID_PATH = &"Not valid scene path."
 
+const PluginButton = preload("uid://cwiqk1fttu0sy").PluginButton #! resolve ALibEditor.UIHelpers.Buttons.PluginButton
+
 var _button:Button
 var _label:=Label.new()
 
@@ -38,7 +40,7 @@ func _ready() -> void:
 	_label.mouse_filter = Control.MOUSE_FILTER_PASS
 	_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	
-	_button = ALibEditor.UIHelpers.Buttons.PluginButton.new("", _on_button_pressed).get_button()
+	_button = PluginButton.new("", _on_button_pressed).get_button()
 	_button.mouse_filter = Control.MOUSE_FILTER_PASS
 	add_child(_button)
 	if icon == null:
