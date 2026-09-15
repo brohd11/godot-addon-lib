@@ -192,6 +192,67 @@ static func get_enum_info(stripped_line: String) -> Array:
 	
 	return [enum_name, enum_data]
 
+## Entries of a nameless enum as [name, line, column, assignment], shaped like tree-sitter's output:
+## assignment is the explicit value text, else "0" for the first entry or "PREV + 1".
+## `lines` start at the enum's `{` line, comments stripped, columns intact.
+static func get_nameless_enum_entries(lines:PackedStringArray, first_line:int) -> Array:
+	var entries:Array = []
+	var previous:String = ""
+	var started:bool = false
+	var depth:int = 0
+	var quote:String = ""
+	var text:String = ""
+	var pos:Vector2i = Vector2i(-1, -1) # (line offset, column) where the current entry starts
+	for li:int in lines.size():
+		var line_text:String = lines[li]
+		if not text.is_empty():
+			text += " "
+		for i:int in line_text.length():
+			var c:String = line_text[i]
+			if not started:
+				started = c == "{"
+				continue
+			if quote != "":
+				text += c
+				if c == quote and line_text[i - 1] != "\\":
+					quote = ""
+				continue
+			if depth == 0 and (c == "," or c == "}"):
+				previous = _add_enum_entry(entries, text, pos, first_line, previous)
+				text = ""
+				pos = Vector2i(-1, -1)
+				if c == "}":
+					return entries
+				continue
+			if c == '"' or c == "'":
+				quote = c
+			elif c == "(" or c == "[" or c == "{":
+				depth += 1
+			elif c == ")" or c == "]" or c == "}":
+				depth -= 1
+			if pos.x == -1 and c != " " and c != "\t":
+				pos = Vector2i(li, i)
+			text += c
+	_add_enum_entry(entries, text, pos, first_line, previous) # unterminated (mid-edit)
+	return entries
+
+static func _add_enum_entry(entries:Array, text:String, pos:Vector2i, first_line:int, previous:String) -> String:
+	text = text.strip_edges()
+	if text.is_empty():
+		return previous
+	var entry_name:String = text
+	var value:String = ""
+	var eq:int = text.find("=")
+	if eq != -1:
+		entry_name = text.substr(0, eq).strip_edges()
+		value = text.substr(eq + 1).strip_edges()
+	if not entry_name.is_valid_ascii_identifier():
+		return previous
+	if value.is_empty():
+		value = "0" if previous.is_empty() else previous + " + 1"
+	entries.append([entry_name, first_line + pos.x, pos.y, value])
+	return entry_name
+
 
 static func get_func_info(stripped_text: String) -> Dictionary:
 	_initialize_arg_regex()
