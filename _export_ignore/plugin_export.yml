@@ -1,8 +1,8 @@
-export_root: "res://addons/addon_lib/brohd/export_ignore/exports"
+export_root: "res://addons/addon_lib/brohd/_export_ignore/exports"
 plugin_folder: "brohd{{version=brohd}}"
-pre_script: "res://addons/addon_lib/brohd/export_ignore/pre_post_export.gd"
-post_script: "res://addons/addon_lib/brohd/export_ignore/pre_post_export.gd"
-build_require: ["brohd11/godot-editor-node-ref@v0.3.3"]
+pre_script: "res://addons/addon_lib/brohd/_export_ignore/pre_post_export.gd"
+post_script: "res://addons/addon_lib/brohd/_export_ignore/pre_post_export.gd"
+build_require: @require
 compile_require: []
 options:
   overwrite: true
@@ -32,7 +32,7 @@ exports:
     export_folder: "brohd{{version=brohd}}/brohd"
     exclude:
       directories:
-        - "res://addons/addon_lib/brohd/export_ignore"
+        - "res://addons/addon_lib/brohd/_export_ignore"
       file_extensions: []
       files: []
     other_transfers: []

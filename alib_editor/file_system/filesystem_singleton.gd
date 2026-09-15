@@ -1,10 +1,11 @@
 @tool
 class_name FileSystemSingleton
-extends "res://addons/addon_lib/brohd/singleton/singleton_ref_count.gd" #! ext Singletons.RefCount
+extends "res://addons/addon_lib/singleton/singleton_ref_count.gd" #! ext Singletons.RefCount
 
 const CacheHelper = preload("res://addons/addon_lib/brohd/alib_runtime/cache_helper/cache_helper.gd")
 const UTree = preload("res://addons/addon_lib/brohd/alib_runtime/utils/u_tree.gd")
 const UNode = preload("res://addons/addon_lib/brohd/alib_runtime/utils/u_node.gd")
+const UFile = UtilR.Files.URFile
 const UVersion = preload("res://addons/addon_lib/brohd/alib_runtime/utils/u_version.gd")
 const UClassDetail = preload("res://addons/addon_lib/brohd/alib_editor/utils/src/u_class_detail.gd")
 const FileSystem = preload("res://addons/addon_lib/brohd/alib_editor/utils/src/editor_nodes/filesystem.gd")

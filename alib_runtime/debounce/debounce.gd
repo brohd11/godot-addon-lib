@@ -1,5 +1,5 @@
 class_name Debounce
-extends "res://addons/addon_lib/brohd/singleton/singleton_base.gd" #! ext Singletons.Base
+extends "res://addons/addon_lib/singleton/singleton_base.gd" #! ext Singletons.Base
 
 const PE_STRIP_CAST_SCRIPT = preload("res://addons/addon_lib/brohd/alib_runtime/debounce/debounce.gd")
 static func get_singleton_name() -> String:

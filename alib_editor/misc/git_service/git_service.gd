@@ -1,7 +1,7 @@
 ## shared background git data provider for editor consumers.
 ## keeps repo status cached and refreshes one repo at a time.
 class_name GitService
-extends "res://addons/addon_lib/brohd/singleton/singleton_ref_count.gd" #! ext Singletons.RefCount
+extends "res://addons/addon_lib/singleton/singleton_ref_count.gd" #! ext Singletons.RefCount
 
 
 
