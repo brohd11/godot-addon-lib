@@ -29,7 +29,8 @@ options:
 exports:
   -
     source: "res://addons/addon_lib/brohd"
-    export_folder: "brohd{{version=brohd}}/brohd"
+    export_name: "brohd{{version=brohd}}"
+    export_folder: "addons/addon_lib/brohd"
     exclude:
       directories:
         - "res://addons/addon_lib/brohd/_export_ignore"
