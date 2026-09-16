@@ -1,5 +1,5 @@
 
-const GDScriptParser = preload("res://addons/addon_lib/brohd/alib_runtime/utils/gdscript/parser/gdscript_parser.gd")
+const GDScriptParser = preload("res://addons/addon_lib/gdscript_parser/gdscript_parser.gd")
 const UString = GDScriptParser.UString
 const GDScriptParse = GDScriptParser.UStringGDScriptParse
 const Keywords = GDScriptParse.Keywords

@@ -35,7 +35,7 @@ const _PRINT = [
 ]
 
 const _PATHS = [
-	"res://addons/addon_lib/brohd/alib_runtime/utils/gdscript/parser/gdscript_parser.gd"
+	"res://addons/addon_lib/gdscript_parser/gdscript_parser.gd"
 ]
 
 
