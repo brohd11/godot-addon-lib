@@ -260,7 +260,7 @@ static func get_func_info(stripped_text: String) -> Dictionary:
 		_func_regex = RegEx.new()
 		_func_regex.compile("^(?:static\\s+)?func\\s+([a-zA-Z_]\\w*)\\s*\\((.*)\\)(?:\\s*->\\s*([^:]+))?")
 	
-	var func_data:Dictionary = { Keys.FUNC_ARGS: {} }
+	var func_data:Dictionary = { Keys.FUNC_ARGS: {}, "rest_arg": "" }
 	
 	var _match:RegExMatch = _func_regex.search(stripped_text)
 	if not _match:
@@ -275,13 +275,19 @@ static func get_func_info(stripped_text: String) -> Dictionary:
 		func_data[Keys.FUNC_RETURN] = return_type
 	
 	if not args_string.is_empty():
-		var split_args:Array[String] = safe_split_args(args_string)
+		var split_args:Array[String] = safe_split_args(args_string, true)
 		
 		for arg_str:String in split_args:
+			var rest:bool = arg_str.begins_with("...")
+			arg_str = arg_str.trim_prefix("...").strip_edges() if rest else arg_str
 			var arg_match:RegExMatch = _arg_regex.search(arg_str)
 			if arg_match:
 				var arg_name:String = arg_match.get_string(1).strip_edges()
 				var type_hint:String = arg_match.get_string(2).strip_edges()
+				if rest:
+					func_data.rest_arg = arg_name
+					if type_hint.is_empty():
+						type_hint = "Array"
 				var default_val:String = arg_match.get_string(3).strip_edges()
 				
 				var implicit_type_hint:bool = type_hint.is_empty() and UString.rfind_index_safe(arg_str, ":", _match.get_start(3)) > -1
@@ -329,7 +335,7 @@ static func get_signal_info(stripped_text: String) -> Dictionary:
 	return signal_data
 
 
-static func safe_split_args(args_str: String) -> Array[String]:
+static func safe_split_args(args_str: String, preserve_rest:bool = false) -> Array[String]:
 	var args: Array[String] = []
 	var current_arg:String = ""
 	var bracket_depth:int = 0
@@ -365,7 +371,7 @@ static func safe_split_args(args_str: String) -> Array[String]:
 	if not current_arg.strip_edges().is_empty():
 		current_arg = current_arg.strip_edges()
 		#TEST
-		if current_arg.begins_with("..."):
+		if not preserve_rest and current_arg.begins_with("..."):
 			current_arg = current_arg.trim_prefix("...").strip_edges()
 		#TEST
 		args.append(current_arg)
