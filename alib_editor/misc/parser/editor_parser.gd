@@ -3,7 +3,6 @@ extends Singletons.RefCount
 
 #! strip-cast GDScriptParser
 
-const GDScriptParser = preload("uid://c4465kdwgj042") #! resolve ALibRuntime.Utils.UGDScript.Parser
 const ParserWarmup = preload("res://addons/addon_lib/brohd/alib_editor/misc/parser/editor_parser/warmup.gd")
 
 # Use 'PE_STRIP_CAST_SCRIPT' to auto strip type casts with plugin exporter, if the class is not a global name

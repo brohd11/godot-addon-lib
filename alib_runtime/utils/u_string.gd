@@ -9,7 +9,6 @@ const Token = preload("res://addons/addon_lib/brohd/alib_runtime/utils/string/to
 const Filter = preload("res://addons/addon_lib/brohd/alib_runtime/utils/string/filter.gd")
 const StringMap = preload("res://addons/addon_lib/brohd/alib_runtime/utils/string/string_map.gd")
 const PrintRich = preload("res://addons/addon_lib/brohd/alib_runtime/utils/string/print_rich_helper.gd")
-const GDScriptParse = preload("res://addons/addon_lib/brohd/alib_runtime/utils/string/gdscript_parse.gd")
 
 static func hash_string(text:String, hash_type:=HashingContext.HASH_SHA256, chars:int=-1):
 	var ctx = HashingContext.new()

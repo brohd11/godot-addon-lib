@@ -1,8 +1,7 @@
 
-const GDScriptParser = preload("res://addons/addon_lib/gdscript_parser/gdscript_parser.gd")
-const UString = GDScriptParser.UString
-const GDScriptParse = GDScriptParser.UStringGDScriptParse
-const Keywords = GDScriptParse.Keywords
+const URString = GDScriptParser.URString
+const MemberParse = GDScriptParser.MemberParse
+const Keywords = MemberParse.Keywords
 
 const TagParser = preload("uid://gmbyxd0dnujb") #! resolve ALibEditor.Singleton.TagParser
 const EditorGDScriptParser = preload("uid://t2dewmuth0sy") #! resolve ALibEditor.Singleton.EditorGDScriptParser
@@ -37,7 +36,7 @@ static func format_script(parser:GDScriptParser, script_editor:CodeEdit):
 		
 		var text = script_editor.get_line(i)
 		var stripped_text = text.strip_edges()
-		if GDScriptParse.get_line_declaration(stripped_text).is_empty() and not stripped_text.begins_with("for "):
+		if MemberParse.get_line_declaration(stripped_text).is_empty() and not stripped_text.begins_with("for "):
 			i += 1
 			continue
 		var line_data = check_type_in_line(code_edit_parser, i)
@@ -55,7 +54,7 @@ static func format_script(parser:GDScriptParser, script_editor:CodeEdit):
 static func check_type_in_line(code_edit_parser:GDScriptParser.CodeEditParser, line_i:int) -> Dictionary:
 	var context_data:Dictionary = code_edit_parser.get_line_context(line_i)
 	var stripped_l:String = context_data.get(GDScriptParser.Keys.CONTEXT_TEXT).strip_edges()
-	var dec:StringName = GDScriptParse.get_line_declaration(stripped_l)
+	var dec:StringName = MemberParse.get_line_declaration(stripped_l)
 	var member_info = null
 	
 	if dec == &"":
@@ -64,17 +63,17 @@ static func check_type_in_line(code_edit_parser:GDScriptParser.CodeEditParser, l
 		else:
 			dec = Keywords.FOR
 	if dec == Keywords.VAR or dec == Keywords.STATIC_VAR:
-		var type_info:Array = GDScriptParse.get_var_or_const_info(stripped_l, false)
+		var type_info:Array = MemberParse.get_var_or_const_info(stripped_l, false)
 		if type_info[1] != "":
 			return {}
 		member_info = type_info
 	elif dec == Keywords.FUNC or dec == Keywords.STATIC_FUNC:
-		if UString.string_safe_count(stripped_l, "->") != 0:
+		if URString.string_safe_count(stripped_l, "->") != 0:
 			return {}
-		member_info = GDScriptParse.get_func_info(stripped_l)
+		member_info = MemberParse.get_func_info(stripped_l)
 	elif dec == Keywords.FOR:
 		
-		var type_info:Array = GDScriptParse.get_for_loop_info(stripped_l)
+		var type_info:Array = MemberParse.get_for_loop_info(stripped_l)
 		if type_info[1] != "":
 			return {}
 		member_info = type_info
@@ -139,7 +138,7 @@ static func _insert_types(parser:GDScriptParser, script_editor:CodeEdit, untyped
 			if not is_instance_valid(class_obj):
 				continue
 			
-			var func_nm:String = member_info.get(GDScriptParse.Keys.FUNC_NAME)
+			var func_nm:String = member_info.get(MemberParse.Keys.FUNC_NAME)
 			var type_access_path:String = get_type_access_path(parser, func_nm + "()", class_obj.declaration_line)
 			if type_access_path == "":
 				continue
@@ -148,7 +147,7 @@ static func _insert_types(parser:GDScriptParser, script_editor:CodeEdit, untyped
 			if multiline:
 				for ni:int in range(end_idx, start_idx - 1, -1): # work backwards
 					var line_text:String = script_editor.get_line(ni)
-					var colon_idx:int = UString.string_safe_rfind(line_text, ":")
+					var colon_idx:int = URString.string_safe_rfind(line_text, ":")
 					if colon_idx > -1:
 						line_text = line_text.substr(0, colon_idx).strip_edges()
 						if line_text.ends_with(")"):
@@ -157,7 +156,7 @@ static func _insert_types(parser:GDScriptParser, script_editor:CodeEdit, untyped
 			
 			var target_line_text:String = script_editor.get_line(target_line)
 			
-			var col_idx:int = UString.string_safe_rfind(target_line_text, ":")
+			var col_idx:int = URString.string_safe_rfind(target_line_text, ":")
 			var end_text:String = target_line_text.substr(col_idx)
 			target_line_text = target_line_text.left(col_idx).strip_edges(false)
 			target_line_text = target_line_text + " -> " + type_access_path + end_text
@@ -206,7 +205,7 @@ static func get_type_access_path(parser:GDScriptParser, expression:String, line:
 		return ""
 	
 	inferred_type = inferred_type.trim_suffix(GDScriptParser.Keys.INS_DELIM)
-	if not GDScriptParse.is_absolute_path(inferred_type):
+	if not MemberParse.is_absolute_path(inferred_type):
 		if inferred_type.ends_with(GDScriptParser.Keys.ENUM_PATH_SUFFIX): # these are handled
 			return inferred_type.trim_suffix(GDScriptParser.Keys.ENUM_PATH_SUFFIX)
 		
@@ -218,7 +217,7 @@ static func get_type_access_path(parser:GDScriptParser, expression:String, line:
 			var current_script = ScriptEditorRef.get_current_script()
 			if ClassDB.is_parent_class(non_member, current_script.get_instance_base_type()):
 				non_member = ""
-		return UString.dot_join(non_member, member_name)
+		return URString.dot_join(non_member, member_name)
 	else:
 		var current_class:String = parser.get_class_at_line(line)
 		var class_obj:GDScriptParser.ParserClass = parser.get_class_object(current_class) as GDScriptParser.ParserClass

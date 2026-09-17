@@ -14,7 +14,6 @@ extends RefCounted
 ## Runs on parsers isolated from the editor's live cache; the shared artifact is the on-disk dir.
 ## Non-blocking: drains WARMUP_PER_FRAME scripts per frame, awaiting a process_frame between batches.
 
-const GDScriptParser = preload("uid://c4465kdwgj042") #! resolve ALibRuntime.Utils.UGDScript.Parser
 const GetFiles = preload("uid://b3p6nfmpcltt0") #! resolve ALibRuntime.Utils.UFile.GetFiles
 const WARMUP_PER_FRAME := 3 # scripts resolved per frame before yielding (parse is heavy; keep small)
 
