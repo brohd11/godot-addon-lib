@@ -47,6 +47,10 @@ static func scan(file_path:String, ctx) -> Array:
 
 	var map = UString.StringMap.new(text)
 	var line_starts = _build_line_starts(text)
+	var declared = _declared_names(text, map, line_starts)
+	if not ctx.ignore_line_tags.is_empty():
+		text = mask_ignored_lines(text, ctx.ignore_line_tags)
+		map = UString.StringMap.new(text)
 
 	# Lines first: `extends Foo` is already a global-class use, so the token pass must not
 	# emit a second edge for it.
@@ -58,13 +62,49 @@ static func scan(file_path:String, ctx) -> Array:
 			claimed[ref.raw] = true
 
 	var refs:Array = []
-	var declared = _declared_names(text, map, line_starts)
 	_scan_global_classes(text, map, line_starts, file_path, declared, claimed, ctx, refs)
 	refs.append_array(line_refs)
 
 	if ctx.resolve_access_paths:
 		_scan_access_paths(text, map, line_starts, file_path, declared, ctx, refs)
 	return refs
+
+
+## Zero-based line numbers. Inspect real comments, including multiline-string context.
+static func ignored_line_numbers(text:String, tags:Array) -> Dictionary:
+	var ignored = {}
+	if tags.is_empty() or not text.contains("#!"):
+		return ignored
+	var map = UString.StringMap.new(text)
+	var offset = 0
+	var lines = text.split("\n")
+	for i in lines.size():
+		var line:String = lines[i]
+		var start = _comment_start(line, map, offset)
+		offset += line.length() + 1
+		if start == -1:
+			continue
+		var comment = line.substr(start)
+		for tag:String in tags:
+			var marker = "#! " + tag
+			if not comment.begins_with(marker):
+				continue
+			var rest = comment.substr(marker.length())
+			if rest == "" or rest[0] in [" ", "\t", "\r", ";"]:
+				ignored[i] = true
+				break
+	return ignored
+
+
+## Preserve offsets so callers can compare filtered references against the original source.
+static func mask_ignored_lines(text:String, tags:Array) -> String:
+	var ignored = ignored_line_numbers(text, tags)
+	if ignored.is_empty():
+		return text
+	var lines = text.split("\n")
+	for i in ignored:
+		lines[i] = " ".repeat(lines[i].length())
+	return "\n".join(lines)
 
 
 # `Singletons.Base` names singleton_base.gd, not the namespace file its head resolves to.

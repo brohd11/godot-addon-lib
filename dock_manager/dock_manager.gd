@@ -197,10 +197,13 @@ func post_init():
 		dock_target -= 3 #^ to offset saved enum back to working val
 	else:
 		dock_target = default_dock
+	
 	if dock_target > -3:
-		await dock_instance(int(dock_target))
-		if dock_index > -1:
-			_set_tab_index(dock_index)
+		if dock_target == -1: # main screen
+			await dock_instance(int(dock_target))
+		else:
+			# just place in default, engine will take care of it
+			await dock_instance(int(default_dock))
 	else:
 		if dock_layout_data != null:
 			_set_window_settings(dock_layout_data)

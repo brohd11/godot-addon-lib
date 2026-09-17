@@ -54,6 +54,7 @@ var scan_follow_extensions:Array = ["gd", "tscn", "tres"]
 var scan_ignore_dir_paths:Array = []
 var scan_ignore_dir_names:Array = []
 var scan_tag_handlers:Dictionary = {}
+var scan_ignore_line_tags:Array = []
 
 ## Unscaled gaps between nodes; both are multiplied by the editor scale at layout time.
 ## Vertical needs the most - columns are already separated by node width.
@@ -187,6 +188,7 @@ func set_files(paths) -> void:
 	collector.ignore_dir_paths = scan_ignore_dir_paths.duplicate()
 	collector.ignore_dir_names = scan_ignore_dir_names.duplicate()
 	collector.include_missing = show_missing
+	collector.ignore_line_tags = scan_ignore_line_tags.duplicate()
 	for tag:String in scan_tag_handlers:
 		collector.add_tag_handler(tag, scan_tag_handlers[tag])
 

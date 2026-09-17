@@ -72,6 +72,8 @@ var use_project_classes:bool = true
 var resolve_access_paths:bool = true
 ## {tag_name_without_prefix: Callable}. Empty means every "#!" tag is an ordinary comment.
 var tag_handlers:Dictionary = {}
+## Tags that suppress references on their line. Empty keeps the collector policy-neutral.
+var ignore_line_tags:Array = []
 
 ## {file_path: {const_name: target}} plus "autogen:<path>" flags, shared for one scan.
 var access_cache:Dictionary = {}
