@@ -9,7 +9,7 @@ const TomlHighlighter = preload("res://addons/addon_lib/brohd/alib_runtime/misc/
 const XmlHighlighter = preload("res://addons/addon_lib/brohd/alib_runtime/misc/syntax_highlighters/text/types/xml_highlighter.gd")
 
 ## Optional provider owned by GDSh. Keep this a path so ALib works without GDSh installed.
-const GDSH_PROVIDER_PATH = "res://addons/addon_lib/gdsh/internal/script_highlighter_logic.gd"
+const GDSH_PROVIDER_PATH = "res://addons/addon_lib/gdsh/src/ui/script_highlighter_logic.gd"
 
 ## Formats bundled with ALib. GDSh is discovered separately when installed.
 const EXTENSION_MAP := {
@@ -67,7 +67,7 @@ static func has_non_static_provider(ext:String):
 
 static func get_non_static_provider(ext:String):
 	var normalized = normalize(ext)
-	if not NON_STATIC_MAP.has(normalized):
+	if not has_non_static_provider(normalized):
 		return null
 	var provider = ResourceLoader.load(NON_STATIC_MAP[normalized], "GDScript") as GDScript
 	if provider == null:
