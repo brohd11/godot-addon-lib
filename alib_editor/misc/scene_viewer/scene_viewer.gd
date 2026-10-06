@@ -4,8 +4,8 @@ extends VBoxContainer
 
 const PluginButton = preload("uid://cwiqk1fttu0sy").PluginButton #! resolve ALibEditor.UIHelpers.Buttons.PluginButton
 const EditorIcons = preload("uid://viocyrti6wce") #! resolve ALibEditor.Singleton.EditorIcons
-const SettingHelperSingleton = preload("uid://b6jyhs240r0hm") #! resolve ALibRuntime.Settings.SettingHelperSingleton
-const SettingHelperJson = preload("uid://byo18jbf0wwbt") #! resolve ALibRuntime.Settings.SettingHelperJson
+const SettingHelperSingleton = preload("uid://60187tsv40mq") #! resolve SettingHelper.Singleton
+const SettingHelperJson = preload("uid://dku4srj2t8htd") #! resolve SettingHelper.Json
 const Options = preload("uid://c61qxuau2v0pb") #! resolve ALibRuntime.Popups.Options
 
 const MeshManager = preload("res://addons/addon_lib/brohd/alib_editor/misc/scene_viewer/components/mesh_manager.gd")
