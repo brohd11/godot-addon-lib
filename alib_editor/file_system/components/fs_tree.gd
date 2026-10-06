@@ -6,7 +6,7 @@ const FSTreeHelperBase = preload("res://addons/addon_lib/brohd/alib_editor/file_
 const FileData = preload("uid://fhnuvnmqrurq").FileData #! resolve FileSystemSingleton.FileData
 const PopupID = preload("uid://co1fsmkihc4cg") #! resolve FileSystemSingleton.FSGenericPopupHandler.PopupID
 const FSRenameContext = preload("res://addons/addon_lib/brohd/alib_editor/file_system/util/fs_rename_ctx.gd")
-const NUTree = preload("uid://coqq638olix8k") #! resolve ALibRuntime.NodeUtils.NUTree
+const TreeAltColor = preload("uid://bgfj0lf3e1btg") #! resolve UtilR.Nodes.Trees.AltLineColor
 
 const SET_ROOT = "Set Root"
 const RESET_ROOT = "Reset Root"
@@ -159,7 +159,7 @@ func _set_alt_line_color(state:bool):
 
 func _on_file_tree_draw() -> void:
 	if draw_alternate_line_colors:
-		NUTree.AltColor.draw_lines(file_tree)
+		TreeAltColor.draw_lines(file_tree)
 
 func _on_fs_folder_moved(old_path:String, new_path:String):
 	var rename = FSTreeHelperBase.update_root(root_dir, old_path, new_path)

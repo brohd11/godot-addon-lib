@@ -38,7 +38,7 @@ func _get_ready_bool() -> bool:
 
 #endregion
 
-const SettingHelper = preload("uid://c4l4v4eufkmtx") #! resolve ALibEditor.Settings.SettingHelperEditor
+const SHEditor = preload("uid://c4l4v4eufkmtx") #! resolve ALibEditor.Settings.SettingHelperEditor
 
 const GitUtil = preload("res://addons/addon_lib/brohd/alib_editor/misc/git_service/git_util.gd")
 const GitDiff = preload("res://addons/addon_lib/brohd/alib_editor/misc/git_service/git_diff.gd")
@@ -57,7 +57,7 @@ var colors:GitColors
 
 var log_commands:bool = false
 
-var setting_helper:SettingHelper
+var setting_helper:SHEditor
 
 var repos:Array[String] = []
 var current_repo:String = MAIN_REPO
@@ -88,7 +88,7 @@ func _ready() -> void:
 
 	EditorInterface.get_resource_filesystem().filesystem_changed.connect(_on_filesystem_changed, 1)
 	
-	setting_helper = SettingHelper.new()
+	setting_helper = SHEditor.new()
 	colors = GitColors.new()
 	colors.connect_settings(setting_helper)
 	setting_helper.subscribe_property(self, &"log_commands", EditorSet.LOG_COMMANDS, false)
@@ -350,7 +350,7 @@ class GitColors:
 	var repo:Color = GitUtil.Colors.REPO
 	
 	
-	func connect_settings(setting_helper:SettingHelper):
+	func connect_settings(setting_helper:SHEditor):
 		setting_helper.subscribe_property(self, &"conflicted", EditorSet.CONFLICTED, GitUtil.Colors.RED)
 		setting_helper.subscribe_property(self, &"staged", EditorSet.STAGED, GitUtil.Colors.GREEN)
 		setting_helper.subscribe_property(self, &"modified", EditorSet.MODIFIED, GitUtil.Colors.L_YELLOW)

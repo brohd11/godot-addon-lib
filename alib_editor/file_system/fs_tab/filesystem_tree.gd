@@ -14,8 +14,8 @@ const FSPopupHelper = FSClasses.FSPopupHelper
 const FSUtil = FSClasses.FSUtil
 const UFile = FSUtil.UFile
 const UTree = FSUtil.UTree
+const TreeAltColor = FSUtil.TreeAltColor
 const UEditorTheme = FSUtil.UEditorTheme
-const NUTree = FSUtil.NUTree
 const UVersion = FSUtil.UVersion
 
 const FileData = FileSystemSingleton.FileData
@@ -80,7 +80,7 @@ func _ready() -> void:
 
 func _draw() -> void:
 	if draw_alternate_line_colors:
-		NUTree.AltColor.draw_lines(self)
+		TreeAltColor.draw_lines(self)
 
 
 func set_dir(target_dir:String, build:=false):
@@ -361,7 +361,7 @@ func start_edit():
 	
 	original_file_name = item.get_text(0)
 	edit_selected(true)
-	var line_edit = NUTree.get_line_edit(self) as LineEdit
+	var line_edit = UTree.get_line_edit(self) as LineEdit
 	var ext_idx = line_edit.text.find(".")
 	if ext_idx > -1:
 		line_edit.select(0, ext_idx)

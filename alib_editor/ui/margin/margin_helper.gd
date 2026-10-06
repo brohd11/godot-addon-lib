@@ -1,6 +1,6 @@
 #! namespace ALibEditor.UIHelpers class Margin
 
-const UVersion = preload("uid://b4f7kxqukmbj2") #! resolve ALibRuntime.Utils.UVersion
+const UVersion = preload("uid://dn156lc18d1vt") #! resolve UtilR.UVersion
 
 static func new_plugin_margin_container():
 	var margin_container = MarginContainer.new()

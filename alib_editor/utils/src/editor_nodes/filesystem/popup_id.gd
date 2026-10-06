@@ -1,4 +1,4 @@
-const UVersion = preload("uid://b4f7kxqukmbj2") #! resolve ALibRuntime.Utils.UVersion
+const UVersion = EditorNodeRef.UVersion
 
 static func add_to_favorites():
 	var minor = _get_minor_version()

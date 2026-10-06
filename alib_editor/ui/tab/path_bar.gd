@@ -1,6 +1,6 @@
 extends TabBar
 
-const UVersion = preload("uid://b4f7kxqukmbj2") #! resolve ALibRuntime.Utils.UVersion
+const UVersion = preload("uid://dn156lc18d1vt") #! resolve UtilR.UVersion
 
 enum DisplayMode {
 	FILE_SYSTEM,

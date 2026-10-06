@@ -1,5 +1,5 @@
 
-const URString = GDScriptParser.URString
+const UString = GDScriptParser.UString
 const MemberParse = GDScriptParser.MemberParse
 const Keywords = MemberParse.Keywords
 
@@ -68,7 +68,7 @@ static func check_type_in_line(code_edit_parser:GDScriptParser.CodeEditParser, l
 			return {}
 		member_info = type_info
 	elif dec == Keywords.FUNC or dec == Keywords.STATIC_FUNC:
-		if URString.string_safe_count(stripped_l, "->") != 0:
+		if UString.string_safe_count(stripped_l, "->") != 0:
 			return {}
 		member_info = MemberParse.get_func_info(stripped_l)
 	elif dec == Keywords.FOR:
@@ -147,7 +147,7 @@ static func _insert_types(parser:GDScriptParser, script_editor:CodeEdit, untyped
 			if multiline:
 				for ni:int in range(end_idx, start_idx - 1, -1): # work backwards
 					var line_text:String = script_editor.get_line(ni)
-					var colon_idx:int = URString.string_safe_rfind(line_text, ":")
+					var colon_idx:int = UString.string_safe_rfind(line_text, ":")
 					if colon_idx > -1:
 						line_text = line_text.substr(0, colon_idx).strip_edges()
 						if line_text.ends_with(")"):
@@ -156,7 +156,7 @@ static func _insert_types(parser:GDScriptParser, script_editor:CodeEdit, untyped
 			
 			var target_line_text:String = script_editor.get_line(target_line)
 			
-			var col_idx:int = URString.string_safe_rfind(target_line_text, ":")
+			var col_idx:int = UString.string_safe_rfind(target_line_text, ":")
 			var end_text:String = target_line_text.substr(col_idx)
 			target_line_text = target_line_text.left(col_idx).strip_edges(false)
 			target_line_text = target_line_text + " -> " + type_access_path + end_text
@@ -217,7 +217,7 @@ static func get_type_access_path(parser:GDScriptParser, expression:String, line:
 			var current_script = ScriptEditorRef.get_current_script()
 			if ClassDB.is_parent_class(non_member, current_script.get_instance_base_type()):
 				non_member = ""
-		return URString.dot_join(non_member, member_name)
+		return UString.dot_join(non_member, member_name)
 	else:
 		var current_class:String = parser.get_class_at_line(line)
 		var class_obj:GDScriptParser.ParserClass = parser.get_class_object(current_class) as GDScriptParser.ParserClass

@@ -1,5 +1,5 @@
 
-const UWindow = preload("uid://q2lbynew21er") # u_window.gd
+const UWindow = preload("uid://d1yl3cuumcudy") #! resolve UtilR.Nodes.UWindow
 const PopupHelper = preload("uid://bb13ihrvdkjdj") # popup_menu_path_helper.gd
 
 enum SelectMode {

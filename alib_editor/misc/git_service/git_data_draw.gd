@@ -2,7 +2,7 @@ extends RefCounted
 
 ## shared status drawing helpers for Tree and ItemList.
 
-const NUTree = preload("uid://coqq638olix8k") #! resolve ALibRuntime.NodeUtils.NUTree
+const UTree = preload("uid://1gwputufojp6") #! resolve UtilR.Nodes.Trees.UTree
 const NUItemList = preload("uid://cjls86v1v4242") #! resolve ALibRuntime.NodeUtils.NUItemList
 const TreeHelperBase = preload("uid://bm6fl2iu4jew7") #! resolve ALibRuntime.TreeHelperBase
 const FAVORITES_META = "FAVORITES" #! resolve FileSystemSingleton.FileData.FAVORITES_META
@@ -169,7 +169,7 @@ class GitTreeHelper:
 			var meta = current_item.get_meta(Keys.GIT_ICON)
 			var icon:Texture2D = meta.icon
 			
-			if NUTree.item_text_overflows(_tree, current_item, icon):
+			if UTree.item_text_overflows(_tree, current_item, icon):
 				continue
 			
 			_overlay_icons.append({

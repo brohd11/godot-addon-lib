@@ -7,7 +7,7 @@ const RightClickHandler = preload("res://addons/addon_lib/brohd/gui_click_handle
 const UFile = preload("uid://bl33psa06nv1e") #! resolve ALibRuntime.Utils.UFile.Methods
 const EditorIcons = preload("uid://viocyrti6wce") #! resolve ALibEditor.Singleton.EditorIcons
 const UResource = preload("uid://72uu8yngsoht") #! resolve ALibRuntime.Utils.UResource
-const UWindow = preload("uid://q2lbynew21er") #! resolve ALibRuntime.Utils.UWindow
+const UWindow = preload("uid://d1yl3cuumcudy") #! resolve UtilR.Nodes.UWindow
 const LineSubmit = preload("uid://dmilkaqawd510") #! resolve ALibRuntime.Dialog.Handlers.LineSubmit
 
 static func get_scene_path():

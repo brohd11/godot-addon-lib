@@ -18,5 +18,3 @@ const USort = preload("uid://dtrbpu04wxss0") # res://addons/addon_lib/brohd/alib
 const UString = preload("uid://cwootkivqiwq1") # res://addons/addon_lib/brohd/alib_runtime/utils/u_string.gd
 const UTexture = preload("uid://ddu76iygjkxih") # res://addons/addon_lib/brohd/alib_runtime/utils/u_texture.gd
 const UTree = preload("uid://byxrrav3r3afw") # res://addons/addon_lib/brohd/alib_runtime/utils/u_tree.gd
-const UVersion = preload("uid://b4f7kxqukmbj2") # res://addons/addon_lib/brohd/alib_runtime/utils/u_version.gd
-const UWindow = preload("uid://q2lbynew21er") # res://addons/addon_lib/brohd/alib_runtime/utils/u_window.gd

@@ -1,6 +1,6 @@
 
-const FileSystem = preload("uid://dagr353kjvdrc") #! resolve FileSystemSingleton.FileSystem
-const UVersion = preload("uid://b4f7kxqukmbj2") #! resolve FileSystemSingleton.UVersion
+const FileSystem = preload("uid://ckkcgqmrbp57n") #! resolve EditorNodeRef.Refs.FileSystem
+const UVersion = preload("uid://dn156lc18d1vt") #! resolve UtilR.UVersion
 
 
 static func is_new_name_valid(original_file_name:String, new_file_name:String) -> bool:

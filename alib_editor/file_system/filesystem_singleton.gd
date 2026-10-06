@@ -2,13 +2,14 @@
 class_name FileSystemSingleton
 extends "res://addons/addon_lib/singleton/singleton_ref_count.gd" #! ext Singletons.RefCount
 
-const CacheHelper = preload("res://addons/addon_lib/brohd/alib_runtime/cache_helper/cache_helper.gd")
-const UTree = preload("res://addons/addon_lib/brohd/alib_runtime/utils/u_tree.gd")
-const UNode = preload("res://addons/addon_lib/brohd/alib_runtime/utils/u_node.gd")
-const UFile = UtilR.Files.URFile
-const UVersion = preload("res://addons/addon_lib/brohd/alib_runtime/utils/u_version.gd")
-const UClassDetail = preload("res://addons/addon_lib/brohd/alib_editor/utils/src/u_class_detail.gd")
-const FileSystem = preload("res://addons/addon_lib/brohd/alib_editor/utils/src/editor_nodes/filesystem.gd")
+const CacheHelper = UtilR.Files.CacheHelper
+const UTree = UtilR.Nodes.Trees.UTree
+const UNode = UtilR.UNode
+const UFile = UtilR.Files.UFile
+const UVersion = UtilR.UVersion
+const UClassDetail = UtilR.Objects.UClassDetail
+const FileSystem = EditorNodeRef.Refs.FileSystem
+
 const ScenePreview = preload("res://addons/addon_lib/brohd/preview_gen/scene_preview/scene_preview.gd")
 
 const FileTypes = preload("res://addons/addon_lib/brohd/alib_editor/file_system/util/file_types.gd")
@@ -149,6 +150,8 @@ func clear_all_caches():
 	_preview_balance = 0
 
 func _on_filesystem_changed():
+	if not is_instance_valid(editor_fs):
+		editor_fs = EditorInterface.get_resource_filesystem()
 	while editor_fs.is_scanning():
 		await get_tree().process_frame
 	
@@ -1079,7 +1082,7 @@ class GetDropData:
 
 class CanDropData:
 	static func files(at_position: Vector2, data: Variant, extensions:Array=[]) -> bool:
-		return UTree.can_drop_data.files(at_position, data, extensions)
+		return UTree.CanDropData.files(at_position, data, extensions)
 
 class DropData:
 	static func move_dialog(data, target_dir, calling_node):

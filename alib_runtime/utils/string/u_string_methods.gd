@@ -1,1 +1,1 @@
-extends UtilR.Strings.URString
+extends UtilR.Strings.UString

@@ -4,7 +4,7 @@ extends Node
 
 #! import_p PopupHelper,
 
-const UWindow = preload("uid://q2lbynew21er") #! resolve ALibRuntime.Utils.UWindow
+const UWindow = preload("uid://d1yl3cuumcudy") #! resolve UtilR.Nodes.UWindow
 const PopupHelper = preload("res://addons/addon_lib/brohd/alib_runtime/popup_menu/popup_menu_path_helper.gd")
 const MouseHelper = PopupHelper.MouseHelper
 const Options = preload("uid://c61qxuau2v0pb") #! resolve ALibRuntime.Popups.Options

@@ -1,6 +1,6 @@
 #! namespace ALibRuntime.NodeUtils.NUTree
 
-const UVersion = preload("uid://b4f7kxqukmbj2") # u_version.gd
+const UVersion = preload("uid://dn156lc18d1vt") #! resolve UtilR.UVersion
 
 const AltColor = preload("res://addons/addon_lib/brohd/alib_runtime/node_utils/tree/alternate_color.gd")
 

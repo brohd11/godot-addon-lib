@@ -1,4 +1,4 @@
-const NUTree = preload("uid://coqq638olix8k") #! resolve ALibRuntime.NodeUtils.NUTree
+const UTree = preload("uid://1gwputufojp6") #! resolve UtilR.Nodes.Trees.UTree
 const FSTreeHelper = preload("res://addons/addon_lib/brohd/alib_editor/file_system/util/fs_tree_helper.gd")
 
 var original_file_name = ""
@@ -14,7 +14,7 @@ func start_edit():
 	
 	original_file_name = item.get_text(0)
 	_file_tree.edit_selected(true)
-	var line_edit = NUTree.get_line_edit(_file_tree) as LineEdit
+	var line_edit = UTree.get_line_edit(_file_tree) as LineEdit
 	var ext_idx = line_edit.text.find(".")
 	if ext_idx > -1:
 		line_edit.select(0, ext_idx)
