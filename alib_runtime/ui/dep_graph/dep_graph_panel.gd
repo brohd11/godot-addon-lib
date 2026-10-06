@@ -18,10 +18,10 @@ extends GraphEdit
 ## This is a viewer: connections cannot be made or broken, so connection_request and
 ## disconnect_node_request are deliberately left unwired.
 
-const Dependencies = preload("res://addons/addon_lib/brohd/alib_runtime/utils/resource/dependencies.gd")
-const DepFileNode = preload("res://addons/addon_lib/brohd/alib_runtime/ui/dep_graph/dep_file_node.gd")
-const KindStyle = preload("res://addons/addon_lib/brohd/alib_runtime/ui/dep_graph/kind_style.gd")
-const Layout = preload("res://addons/addon_lib/brohd/alib_runtime/ui/dep_graph/layout.gd")
+const Dependencies = preload("res://addons/_lib/brohd/alib_runtime/utils/resource/dependencies.gd")
+const DepFileNode = preload("res://addons/_lib/brohd/alib_runtime/ui/dep_graph/dep_file_node.gd")
+const KindStyle = preload("res://addons/_lib/brohd/alib_runtime/ui/dep_graph/kind_style.gd")
+const Layout = preload("res://addons/_lib/brohd/alib_runtime/ui/dep_graph/layout.gd")
 
 const Kind = Dependencies.Kind
 

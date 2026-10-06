@@ -3,7 +3,7 @@ extends Control
 
 #! import_p Keys,
 
-const RightClickHandler = preload("res://addons/addon_lib/brohd/gui_click_handler/right_click_handler.gd")
+const RightClickHandler = preload("res://addons/_lib/brohd/gui_click_handler/right_click_handler.gd")
 const UFile = preload("uid://bl33psa06nv1e") #! resolve ALibRuntime.Utils.UFile.Methods
 const EditorIcons = preload("uid://viocyrti6wce") #! resolve ALibEditor.Singleton.EditorIcons
 const UResource = preload("uid://72uu8yngsoht") #! resolve ALibRuntime.Utils.UResource

@@ -1,5 +1,5 @@
 
-const PopupHelper = preload("res://addons/addon_lib/brohd/alib_runtime/popup_menu/popup_menu_path_helper.gd")
+const PopupHelper = preload("res://addons/_lib/brohd/alib_runtime/popup_menu/popup_menu_path_helper.gd")
 const ParamKeys = PopupHelper.ParamKeys
 
 static func parse_dict_static(item_dict:Dictionary, icon_only:bool=false, target_control:Control=null):

@@ -1,17 +1,17 @@
 extends Control
 #! import_p Keys,
 
-const PluginSplitPanel = preload("res://addons/addon_lib/brohd/alib_editor/editor_panel/plugin_split_panel.gd")
-const RightClickHandler = preload("res://addons/addon_lib/brohd/gui_click_handler/right_click_handler.gd")
-const ClickState = preload("res://addons/addon_lib/brohd/gui_click_handler/click_state.gd")
+const PluginSplitPanel = preload("res://addons/_lib/brohd/alib_editor/editor_panel/plugin_split_panel.gd")
+const RightClickHandler = preload("res://addons/_lib/brohd/gui_click_handler/right_click_handler.gd")
+const ClickState = preload("res://addons/_lib/brohd/gui_click_handler/click_state.gd")
 const UFile = preload("uid://bl33psa06nv1e") #! resolve ALibRuntime.Utils.UFile.Methods
 const UResource = preload("uid://72uu8yngsoht") #! resolve ALibRuntime.Utils.UResource
 const Margin = preload("uid://b5wdpe8qi1pqg") #! resolve ALibEditor.UIHelpers.Margin
 
 const ThemeColor = preload("uid://dsukbd2hmebmw") #! resolve ALibEditor.Utils.UEditorTheme.ThemeColor
-#const ButtonDetector = preload("res://addons/addon_lib/brohd/alib_editor/editor_panel/button_detector.gd")
+#const ButtonDetector = preload("res://addons/_lib/brohd/alib_editor/editor_panel/button_detector.gd")
 
-const DogEarButton = preload("res://addons/addon_lib/brohd/alib_runtime/ui/dog_ear/dog_ear_button.gd")
+const DogEarButton = preload("res://addons/_lib/brohd/alib_runtime/ui/dog_ear/dog_ear_button.gd")
 
 var right_click_handler:RightClickHandler
 

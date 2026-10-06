@@ -11,7 +11,7 @@ extends GraphNode
 ## The node ends up documenting its own edges - left port lit means "something pulls this in
 ## that way", right port lit means "this file references out that way".
 
-const KindStyle = preload("res://addons/addon_lib/brohd/alib_runtime/ui/dep_graph/kind_style.gd")
+const KindStyle = preload("res://addons/_lib/brohd/alib_runtime/ui/dep_graph/kind_style.gd")
 
 const ROW_HEIGHT = 22.0
 const TITLE_HEIGHT = 34.0

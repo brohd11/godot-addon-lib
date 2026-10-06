@@ -1,15 +1,15 @@
 
-const PlainHighlighter = preload("res://addons/addon_lib/brohd/alib_runtime/misc/syntax_highlighters/text/types/plain_highlighter.gd")
-const LogHighlighter = preload("res://addons/addon_lib/brohd/alib_runtime/misc/syntax_highlighters/text/types/log_highlighter.gd")
-const MarkdownHighlighter = preload("res://addons/addon_lib/brohd/alib_runtime/misc/syntax_highlighters/text/types/markdown_highlighter.gd")
-const IniHighlighter = preload("res://addons/addon_lib/brohd/alib_runtime/misc/syntax_highlighters/text/types/ini_highlighter.gd")
-const JsonHighlighter = preload("res://addons/addon_lib/brohd/alib_runtime/misc/syntax_highlighters/text/types/json_highlighter.gd")
-const YamlHighlighter = preload("res://addons/addon_lib/brohd/alib_runtime/misc/syntax_highlighters/text/types/yaml_highlighter.gd")
-const TomlHighlighter = preload("res://addons/addon_lib/brohd/alib_runtime/misc/syntax_highlighters/text/types/toml_highlighter.gd")
-const XmlHighlighter = preload("res://addons/addon_lib/brohd/alib_runtime/misc/syntax_highlighters/text/types/xml_highlighter.gd")
+const PlainHighlighter = preload("res://addons/_lib/brohd/alib_runtime/misc/syntax_highlighters/text/types/plain_highlighter.gd")
+const LogHighlighter = preload("res://addons/_lib/brohd/alib_runtime/misc/syntax_highlighters/text/types/log_highlighter.gd")
+const MarkdownHighlighter = preload("res://addons/_lib/brohd/alib_runtime/misc/syntax_highlighters/text/types/markdown_highlighter.gd")
+const IniHighlighter = preload("res://addons/_lib/brohd/alib_runtime/misc/syntax_highlighters/text/types/ini_highlighter.gd")
+const JsonHighlighter = preload("res://addons/_lib/brohd/alib_runtime/misc/syntax_highlighters/text/types/json_highlighter.gd")
+const YamlHighlighter = preload("res://addons/_lib/brohd/alib_runtime/misc/syntax_highlighters/text/types/yaml_highlighter.gd")
+const TomlHighlighter = preload("res://addons/_lib/brohd/alib_runtime/misc/syntax_highlighters/text/types/toml_highlighter.gd")
+const XmlHighlighter = preload("res://addons/_lib/brohd/alib_runtime/misc/syntax_highlighters/text/types/xml_highlighter.gd")
 
 ## Optional provider owned by GDSh. Keep this a path so ALib works without GDSh installed.
-const GDSH_PROVIDER_PATH = "res://addons/addon_lib/gdsh/src/ui/script_highlighter_logic.gd"
+const GDSH_PROVIDER_PATH = "res://addons/_lib/gdsh/src/ui/script_highlighter_logic.gd"
 
 ## Formats bundled with ALib. GDSh is discovered separately when installed.
 const EXTENSION_MAP := {

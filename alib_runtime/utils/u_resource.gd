@@ -4,13 +4,13 @@ extends RefCounted
 const UTexture = preload("uid://ddu76iygjkxih") #! resolve ALibRuntime.Utils.UTexture
 const UFile = preload("uid://bl33psa06nv1e") #! resolve ALibRuntime.Utils.UFile.Methods
 
-const Audio = preload("res://addons/addon_lib/brohd/alib_runtime/utils/resource/audio.gd")
-const ImageSize = preload("res://addons/addon_lib/brohd/alib_runtime/utils/resource/image_size.gd")
-const UPackedScene = preload("res://addons/addon_lib/brohd/alib_runtime/utils/resource/packed_scene.gd")
-const Dependencies = preload("res://addons/addon_lib/brohd/alib_runtime/utils/resource/dependencies.gd")
+const Audio = preload("res://addons/_lib/brohd/alib_runtime/utils/resource/audio.gd")
+const ImageSize = preload("res://addons/_lib/brohd/alib_runtime/utils/resource/image_size.gd")
+const UPackedScene = preload("res://addons/_lib/brohd/alib_runtime/utils/resource/packed_scene.gd")
+const Dependencies = preload("res://addons/_lib/brohd/alib_runtime/utils/resource/dependencies.gd")
 
 #^ temp
-const Methods = preload("res://addons/addon_lib/brohd/alib_runtime/utils/resource/u_resource_methods.gd")
+const Methods = preload("res://addons/_lib/brohd/alib_runtime/utils/resource/u_resource_methods.gd")
 
 static func save_resource_to_path(res:Resource,path:String, name_overide:String="") -> void:
 	if name_overide == "":

@@ -1,10 +1,10 @@
 class_name ScriptEditorRef
-extends "res://addons/addon_lib/singleton/singleton_base.gd" #! ext Singletons.Base
+extends "res://addons/_lib/singleton/singleton_base.gd" #! ext Singletons.Base
 ## Singleton for accessing script editor nodes and signals. Manages the signals for the current script editor.
 
-const PE_STRIP_CAST_SCRIPT = preload("res://addons/addon_lib/brohd/alib_editor/script_editor_ref/script_editor_ref.gd")
+const PE_STRIP_CAST_SCRIPT = preload("res://addons/_lib/brohd/alib_editor/script_editor_ref/script_editor_ref.gd")
 
-const Selection = preload("res://addons/addon_lib/brohd/alib_runtime/node_utils/code_edit/selection.gd") # ALibRuntime.NodeUtils.NUCodeEdit.Selection
+const Selection = preload("res://addons/_lib/brohd/alib_runtime/node_utils/code_edit/selection.gd") # ALibRuntime.NodeUtils.NUCodeEdit.Selection
 
 static func get_singleton_name() -> String:
 	return "ScriptEditorRef"

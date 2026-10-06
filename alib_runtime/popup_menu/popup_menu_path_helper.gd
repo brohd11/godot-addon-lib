@@ -1,8 +1,8 @@
 extends PopupMenu
 #! namespace ALibRuntime class PopupHelper
 
-const ButtonHelper = preload("res://addons/addon_lib/brohd/alib_runtime/popup_menu/button_helper.gd")
-const UTexture = preload("res://addons/addon_lib/brohd/alib_runtime/utils/u_texture.gd") # ALibRuntime.Utils.UTexture
+const ButtonHelper = preload("res://addons/_lib/brohd/alib_runtime/popup_menu/button_helper.gd")
+const UTexture = preload("res://addons/_lib/brohd/alib_runtime/utils/u_texture.gd") # ALibRuntime.Utils.UTexture
 
 
 const ICON_DEFAULT_SIZE = Vector2(16,16)

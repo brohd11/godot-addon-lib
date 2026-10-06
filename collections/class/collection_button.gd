@@ -1,6 +1,6 @@
 extends Button
 
-const CollectionSingleton = preload("res://addons/addon_lib/brohd/collections/collection_singleton.gd")
+const CollectionSingleton = preload("res://addons/_lib/brohd/collections/collection_singleton.gd")
 
 var _right_click_handler := ClickHandlers.RightClickHandler.new()
 var current_collection:CollectionSingleton.CollectionManager.CollectionBase

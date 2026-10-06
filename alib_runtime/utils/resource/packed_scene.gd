@@ -1,8 +1,8 @@
 const UFile = preload("uid://bl33psa06nv1e") #! resolve ALibRuntime.Utils.UFile.Methods
 const UNode = preload("uid://dsywt12xnn7oh") # u_node.gd
 
-const ReadFile = preload("res://addons/addon_lib/brohd/alib_runtime/utils/resource/packed_scene/read_file.gd")
-const ScnCompiler = preload("res://addons/addon_lib/brohd/alib_runtime/utils/resource/packed_scene/scn_compiler.gd")
+const ReadFile = preload("res://addons/_lib/brohd/alib_runtime/utils/resource/packed_scene/read_file.gd")
+const ScnCompiler = preload("res://addons/_lib/brohd/alib_runtime/utils/resource/packed_scene/scn_compiler.gd")
 
 static func get_scene_aabb(scene_root:Node) -> AABB:
 	var nodes = UNode.recursive_get_nodes(scene_root)

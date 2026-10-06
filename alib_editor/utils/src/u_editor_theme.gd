@@ -3,8 +3,8 @@ extends RefCounted
 
 const BACKPORTED = 100
 
-const ThemeColor = preload("res://addons/addon_lib/brohd/alib_editor/utils/src/editor_theme/theme_color.gd")
-const ThemeSetter = preload("res://addons/addon_lib/brohd/alib_editor/utils/src/editor_theme/theme_setter.gd")
+const ThemeColor = preload("res://addons/_lib/brohd/alib_editor/utils/src/editor_theme/theme_color.gd")
+const ThemeSetter = preload("res://addons/_lib/brohd/alib_editor/utils/src/editor_theme/theme_setter.gd")
 
 static func get_icon(icon_name:String, theme_type:String=&"EditorIcons"):
 	var icon = EditorInterface.get_editor_theme().get_icon(icon_name, theme_type)

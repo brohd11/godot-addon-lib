@@ -1,10 +1,10 @@
 extends RefCounted
 #! namespace ALibRuntime.Utils class UFile
 
-const Methods = preload("res://addons/addon_lib/brohd/alib_runtime/utils/file/u_file_methods.gd")
+const Methods = preload("res://addons/_lib/brohd/alib_runtime/utils/file/u_file_methods.gd")
 
-const GetFilesAsync = preload("res://addons/addon_lib/brohd/alib_runtime/utils/file/get_files_async.gd")
-const GetFiles = preload("res://addons/addon_lib/brohd/alib_runtime/utils/file/get_files.gd")
+const GetFilesAsync = preload("res://addons/_lib/brohd/alib_runtime/utils/file/get_files_async.gd")
+const GetFiles = preload("res://addons/_lib/brohd/alib_runtime/utils/file/get_files.gd")
 
 const IGNORE_FILES = [".gitignore", ".gitattributes", ".gitmodules", ".git"]
 

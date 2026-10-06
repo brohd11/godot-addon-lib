@@ -1,7 +1,7 @@
 @tool
 extends PanelContainer
 
-const CollectionSingleton = preload("res://addons/addon_lib/brohd/collections/collection_singleton.gd")
+const CollectionSingleton = preload("res://addons/_lib/brohd/collections/collection_singleton.gd")
 
 var viewport:Viewport
 var get_preview_callable

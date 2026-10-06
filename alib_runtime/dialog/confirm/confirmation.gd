@@ -1,5 +1,5 @@
 @tool
-extends "res://addons/addon_lib/brohd/alib_runtime/dialog/base/handler_base.gd"
+extends "res://addons/_lib/brohd/alib_runtime/dialog/base/handler_base.gd"
 
 
 static func confirm(message_text:String, dialog_parent=null) -> bool:

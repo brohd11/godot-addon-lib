@@ -8,9 +8,9 @@ const SettingHelperSingleton = preload("uid://60187tsv40mq") #! resolve SettingH
 const SettingHelperJson = preload("uid://dku4srj2t8htd") #! resolve SettingHelper.Json
 const Options = preload("uid://c61qxuau2v0pb") #! resolve ALibRuntime.Popups.Options
 
-const MeshManager = preload("res://addons/addon_lib/brohd/alib_editor/misc/scene_viewer/components/mesh_manager.gd")
-const NodeTree = preload("res://addons/addon_lib/brohd/alib_editor/misc/scene_viewer/components/node_tree.gd")
-const ControllerFreeView = preload("res://addons/addon_lib/brohd/alib_runtime/controller/mouse_camera/free_view.gd")
+const MeshManager = preload("res://addons/_lib/brohd/alib_editor/misc/scene_viewer/components/mesh_manager.gd")
+const NodeTree = preload("res://addons/_lib/brohd/alib_editor/misc/scene_viewer/components/node_tree.gd")
+const ControllerFreeView = preload("res://addons/_lib/brohd/alib_runtime/controller/mouse_camera/free_view.gd")
 
 
 

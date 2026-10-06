@@ -1,5 +1,5 @@
 @tool
-extends "res://addons/addon_lib/brohd/alib_editor/utils/src/editor_theme/theme_mods/base/modify_base.gd"
+extends "res://addons/_lib/brohd/alib_editor/utils/src/editor_theme/theme_mods/base/modify_base.gd"
 
 const FILE_NAME = "custom_theme_46"
 const SAVE_TO_RES = false

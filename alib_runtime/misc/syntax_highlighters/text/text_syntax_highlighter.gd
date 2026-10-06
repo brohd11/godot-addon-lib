@@ -6,7 +6,7 @@ extends SyntaxHighlighter
 ## highlighter is picked up from [code]dispatcher.gd[/code]. Unhandled extensions fall back to
 ## plain text, so callers never branch on file type:
 ## [codeblock]
-## const TextSyntaxHighlighter = preload("res://addons/addon_lib/brohd/alib_runtime/misc/syntax_highlighters/text/text_syntax_highlighter.gd")
+## const TextSyntaxHighlighter = preload("res://addons/_lib/brohd/alib_runtime/misc/syntax_highlighters/text/text_syntax_highlighter.gd")
 ##
 ## var highlighter = TextSyntaxHighlighter.new()
 ## highlighter.palette = TextSyntaxHighlighter.Palette.from_editor_settings()
@@ -14,8 +14,8 @@ extends SyntaxHighlighter
 ## code_edit.syntax_highlighter = highlighter
 ## [/codeblock]
 
-const Dispatcher = preload("res://addons/addon_lib/brohd/alib_runtime/misc/syntax_highlighters/text/dispatcher.gd")
-const Palette = preload("res://addons/addon_lib/brohd/alib_runtime/misc/syntax_highlighters/text/palette.gd")
+const Dispatcher = preload("res://addons/_lib/brohd/alib_runtime/misc/syntax_highlighters/text/dispatcher.gd")
+const Palette = preload("res://addons/_lib/brohd/alib_runtime/misc/syntax_highlighters/text/palette.gd")
 
 ## Extension driving which highlighter runs, without the leading dot and lower cased.
 var extension:String:

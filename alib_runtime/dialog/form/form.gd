@@ -1,7 +1,7 @@
 @tool
-extends "res://addons/addon_lib/brohd/alib_runtime/dialog/general/general_dialog.gd"
+extends "res://addons/_lib/brohd/alib_runtime/dialog/general/general_dialog.gd"
 
-const Fields = preload("res://addons/addon_lib/brohd/alib_runtime/ui/fields/fields.gd")
+const Fields = preload("res://addons/_lib/brohd/alib_runtime/ui/fields/fields.gd")
 enum FieldType {
 	BOOL,
 	LINE_EDIT,

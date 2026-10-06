@@ -1,7 +1,7 @@
 
 const UResource = preload("uid://72uu8yngsoht") # u_resource.gd
 
-const LineEditField = preload("res://addons/addon_lib/brohd/alib_runtime/ui/fields/class/line_edit.gd")
+const LineEditField = preload("res://addons/_lib/brohd/alib_runtime/ui/fields/class/line_edit.gd")
 
 static func get_bool(name="", icon=null):
 	#var hbox = HBoxContainer.new()

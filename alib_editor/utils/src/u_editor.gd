@@ -2,7 +2,7 @@ extends RefCounted
 #! namespace ALibEditor.Utils class UEditor
 const BACKPORTED = 100
 
-const FileScan = preload("res://addons/addon_lib/brohd/alib_editor/utils/src/editor/file_scan.gd")
+const FileScan = preload("res://addons/_lib/brohd/alib_editor/utils/src/editor/file_scan.gd")
 
 enum ToastSeverity{
 	INFO,

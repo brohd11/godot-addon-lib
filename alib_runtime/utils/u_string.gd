@@ -3,12 +3,12 @@
 const INDENTIFIER_CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_"
 const NUMBERS = "0123456789"
 
-const Methods = preload("res://addons/addon_lib/brohd/alib_runtime/utils/string/u_string_methods.gd")
+const Methods = preload("res://addons/_lib/brohd/alib_runtime/utils/string/u_string_methods.gd")
 
-const Token = preload("res://addons/addon_lib/brohd/alib_runtime/utils/string/token.gd")
-const Filter = preload("res://addons/addon_lib/brohd/alib_runtime/utils/string/filter.gd")
-const StringMap = preload("res://addons/addon_lib/brohd/alib_runtime/utils/string/string_map.gd")
-const PrintRich = preload("res://addons/addon_lib/brohd/alib_runtime/utils/string/print_rich_helper.gd")
+const Token = preload("res://addons/_lib/brohd/alib_runtime/utils/string/token.gd")
+const Filter = preload("res://addons/_lib/brohd/alib_runtime/utils/string/filter.gd")
+const StringMap = preload("res://addons/_lib/brohd/alib_runtime/utils/string/string_map.gd")
+const PrintRich = preload("res://addons/_lib/brohd/alib_runtime/utils/string/print_rich_helper.gd")
 
 static func hash_string(text:String, hash_type:=HashingContext.HASH_SHA256, chars:int=-1):
 	var ctx = HashingContext.new()

@@ -1,5 +1,5 @@
 
-const CollectionBase = preload("res://addons/addon_lib/brohd/collections/class/base/collection_base.gd")
+const CollectionBase = preload("res://addons/_lib/brohd/collections/class/base/collection_base.gd")
 
 const Confirmation = preload("uid://b4rwv7tgks0b5") #! resolve ALibRuntime.Dialog.Handlers.Confirmation
 

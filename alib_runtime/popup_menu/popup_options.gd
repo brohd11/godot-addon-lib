@@ -1,8 +1,8 @@
 #! namespace ALibRuntime.Popups class Options
-const PopupHelper = preload("res://addons/addon_lib/brohd/alib_runtime/popup_menu/popup_menu_path_helper.gd")
+const PopupHelper = preload("res://addons/_lib/brohd/alib_runtime/popup_menu/popup_menu_path_helper.gd")
 const Params = PopupHelper.ParamKeys
 
-const SELF = preload("res://addons/addon_lib/brohd/alib_runtime/popup_menu/popup_options.gd")
+const SELF = preload("res://addons/_lib/brohd/alib_runtime/popup_menu/popup_options.gd")
 
 var _dict:Dictionary = {}
 

@@ -1,5 +1,5 @@
 
-const SELF = preload("res://addons/addon_lib/brohd/alib_runtime/utils/file/get_files.gd")
+const SELF = preload("res://addons/_lib/brohd/alib_runtime/utils/file/get_files.gd")
 
 const GDIGNORE = ".gdignore"
 const GODOT_CACHE_DIR = "res://.godot/"

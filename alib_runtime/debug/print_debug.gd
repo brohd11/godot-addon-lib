@@ -35,7 +35,7 @@ const _PRINT = [
 ]
 
 const _PATHS = [
-	"res://addons/addon_lib/gdscript_parser/gdscript_parser.gd"
+	"res://addons/_lib/gdscript_parser/gdscript_parser.gd"
 ]
 
 

@@ -4,7 +4,7 @@
 ## apart from each other in both light and dark, which a theme's handful of accent colours
 ## cannot promise. Icons DO come from the editor theme, and degrade to null off-editor.
 
-const DepEdge = preload("res://addons/addon_lib/brohd/alib_runtime/utils/resource/dependencies/dep_edge.gd")
+const DepEdge = preload("res://addons/_lib/brohd/alib_runtime/utils/resource/dependencies/dep_edge.gd")
 
 const Kind = DepEdge.Kind
 

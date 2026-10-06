@@ -1,9 +1,9 @@
 #! namespace ALibRuntime.NodeUtils.NUCodeEdit
 
-const _UString = preload("res://addons/addon_lib/brohd/alib_runtime/utils/u_string.gd")
+const _UString = preload("res://addons/_lib/brohd/alib_runtime/utils/u_string.gd")
 
-const Selection = preload("res://addons/addon_lib/brohd/alib_runtime/node_utils/code_edit/selection.gd")
-const StringParse = preload("res://addons/addon_lib/brohd/alib_runtime/node_utils/code_edit/string_parse.gd")
+const Selection = preload("res://addons/_lib/brohd/alib_runtime/node_utils/code_edit/selection.gd")
+const StringParse = preload("res://addons/_lib/brohd/alib_runtime/node_utils/code_edit/string_parse.gd")
 
 
 static func parse_identifier_at_position(text:String, start_pos:int, string_map:_UString.StringMap=null):

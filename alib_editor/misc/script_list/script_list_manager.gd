@@ -8,7 +8,7 @@ const TEXT_FILE_TYPES = ["gd", "json", "cfg", "txt", "ini", "md"]
 
 var text_file_types:= []
 
-const PE_STRIP_CAST_SCRIPT = preload("res://addons/addon_lib/brohd/alib_editor/misc/script_list/script_list_manager.gd")
+const PE_STRIP_CAST_SCRIPT = preload("res://addons/_lib/brohd/alib_editor/misc/script_list/script_list_manager.gd")
 static func get_singleton_name() -> String:
 	return "ScriptListManager"
 

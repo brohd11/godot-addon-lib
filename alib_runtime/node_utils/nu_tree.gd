@@ -2,7 +2,7 @@
 
 const UVersion = preload("uid://dn156lc18d1vt") #! resolve UtilR.UVersion
 
-const AltColor = preload("res://addons/addon_lib/brohd/alib_runtime/node_utils/tree/alternate_color.gd")
+const AltColor = preload("res://addons/_lib/brohd/alib_runtime/node_utils/tree/alternate_color.gd")
 
 static func get_line_edit(tree:Tree):
 	var version = UVersion.get_minor_version()

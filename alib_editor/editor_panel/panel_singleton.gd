@@ -1,13 +1,13 @@
 class_name EditorPanelSingleton
-extends "res://addons/addon_lib/singleton/singleton_base.gd" #! ext Singletons.Base
+extends "res://addons/_lib/singleton/singleton_base.gd" #! ext Singletons.Base
 
-const PluginSplitPanel = preload("res://addons/addon_lib/brohd/alib_editor/editor_panel/plugin_split_panel.gd")
-const PluginTabContainer = preload("res://addons/addon_lib/brohd/alib_editor/editor_panel/plugin_tab_container.gd")
+const PluginSplitPanel = preload("res://addons/_lib/brohd/alib_editor/editor_panel/plugin_split_panel.gd")
+const PluginTabContainer = preload("res://addons/_lib/brohd/alib_editor/editor_panel/plugin_tab_container.gd")
 
 const UResource = preload("uid://72uu8yngsoht") #! resolve ALibRuntime.Utils.UResource
 
 # Use 'PE_STRIP_CAST_SCRIPT' to auto strip type casts with plugin exporter, if the class is not a global name
-const PE_STRIP_CAST_SCRIPT = preload("res://addons/addon_lib/brohd/alib_editor/editor_panel/panel_singleton.gd")
+const PE_STRIP_CAST_SCRIPT = preload("res://addons/_lib/brohd/alib_editor/editor_panel/panel_singleton.gd")
 static func get_singleton_name() -> String:
 	return "EditorPanel"
 
@@ -192,7 +192,7 @@ func _ready() -> void:
 	_register_panels.call_deferred()
 
 func _register_panels():
-	register_panel("Plugin Tabs", "res://addons/addon_lib/brohd/alib_editor/editor_panel/plugin_tab_container.tscn")
+	register_panel("Plugin Tabs", "res://addons/_lib/brohd/alib_editor/editor_panel/plugin_tab_container.tscn")
 
 func _get_ready_bool() -> bool:
 	return is_node_ready()

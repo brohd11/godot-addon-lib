@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-const CollectionContainer = preload("res://addons/addon_lib/brohd/collections/class/collection_container.gd")
+const CollectionContainer = preload("res://addons/_lib/brohd/collections/class/collection_container.gd")
 
 var right_click_handler:ClickHandlers.RightClickHandler
 var collection_container:CollectionContainer

@@ -1,6 +1,6 @@
 extends Control
 
-const ClickState = preload("res://addons/addon_lib/brohd/gui_click_handler/click_state.gd")
+const ClickState = preload("res://addons/_lib/brohd/gui_click_handler/click_state.gd")
 
 enum Position {
 	TOP_LEFT,

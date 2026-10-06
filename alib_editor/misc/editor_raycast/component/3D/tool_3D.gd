@@ -1,4 +1,4 @@
-extends "res://addons/addon_lib/brohd/alib_runtime/controller/viewport_raycast/component/base/tool_base.gd"
+extends "res://addons/_lib/brohd/alib_runtime/controller/viewport_raycast/component/base/tool_base.gd"
 
 const EditorRaycast3D = ALibEditor.Singleton.EditorRaycast3D
 

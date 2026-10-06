@@ -6,7 +6,7 @@ extends RefCounted
 ## [member multiline] in [method _init]; the base then keeps a per-line entry-state cache so
 ## scrolling into the middle of a fenced block still resolves correctly.
 
-const Palette = preload("res://addons/addon_lib/brohd/alib_runtime/misc/syntax_highlighters/text/palette.gd")
+const Palette = preload("res://addons/_lib/brohd/alib_runtime/misc/syntax_highlighters/text/palette.gd")
 
 const STATE_NORMAL := 0
 

@@ -1,7 +1,7 @@
-export_root: "res://addons/addon_lib/brohd/_export_ignore/exports"
+export_root: "res://addons/_lib/brohd/_export_ignore/exports"
 plugin_folder: "brohd{{version=brohd}}"
-pre_script: "res://addons/addon_lib/brohd/_export_ignore/pre_post_export.gd"
-post_script: "res://addons/addon_lib/brohd/_export_ignore/pre_post_export.gd"
+pre_script: "res://addons/_lib/brohd/_export_ignore/pre_post_export.gd"
+post_script: "res://addons/_lib/brohd/_export_ignore/pre_post_export.gd"
 build_require: @require
 compile_require: []
 options:
@@ -28,12 +28,12 @@ options:
     parse_tres: {}
 exports:
   -
-    source: "res://addons/addon_lib/brohd"
+    source: "res://addons/_lib/brohd"
     export_name: "brohd{{version=brohd}}"
-    export_folder: "addons/addon_lib/brohd"
+    export_folder: "addons/_lib/brohd"
     exclude:
       directories:
-        - "res://addons/addon_lib/brohd/_export_ignore"
+        - "res://addons/_lib/brohd/_export_ignore"
       file_extensions: []
       files: []
     other_transfers: []
@@ -42,4 +42,4 @@ exports:
       parse_gd: {}
       parse_tscn: {}
       parse_tres: {}
-    remote_dir: "res://addons/addon_lib/brohd/src/remote"
+    remote_dir: "res://addons/_lib/brohd/src/remote"

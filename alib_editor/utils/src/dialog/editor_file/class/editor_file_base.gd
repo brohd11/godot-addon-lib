@@ -1,4 +1,4 @@
-extends "res://addons/addon_lib/brohd/alib_runtime/dialog/base/handler_base.gd"
+extends "res://addons/_lib/brohd/alib_runtime/dialog/base/handler_base.gd"
 
 var file_mode:EditorFileDialog.FileMode
 

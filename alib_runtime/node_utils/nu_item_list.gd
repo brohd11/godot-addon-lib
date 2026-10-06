@@ -1,6 +1,6 @@
 #! namespace ALibRuntime.NodeUtils.NUItemList
 
-const AltColor = preload("res://addons/addon_lib/brohd/alib_runtime/node_utils/item_list/alternate_color.gd")
+const AltColor = preload("res://addons/_lib/brohd/alib_runtime/node_utils/item_list/alternate_color.gd")
 
 
 static func replace_panel_stylebox_margin(item_list:ItemList, margin:int=0, only_right:=true):

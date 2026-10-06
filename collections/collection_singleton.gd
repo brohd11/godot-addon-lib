@@ -1,12 +1,12 @@
 
 extends Singletons.Base
 
-const Form = preload("res://addons/addon_lib/brohd/alib_runtime/dialog/form/form.gd")
+const Form = preload("res://addons/_lib/brohd/alib_runtime/dialog/form/form.gd")
 
 
 
  #Use 'PE_STRIP_CAST_SCRIPT' to auto strip type casts with plugin exporter, if the class is not a global name
-const PE_STRIP_CAST_SCRIPT = preload("res://addons/addon_lib/brohd/collections/collection_singleton.gd")
+const PE_STRIP_CAST_SCRIPT = preload("res://addons/_lib/brohd/collections/collection_singleton.gd")
 static func get_singleton_name() -> String:
 	return "CollectionSingleton"
 
@@ -25,7 +25,7 @@ func _get_ready_bool() -> bool:
 
 
 
-const CollectionManager = preload("res://addons/addon_lib/brohd/collections/class/collection_manager.gd")
+const CollectionManager = preload("res://addons/_lib/brohd/collections/class/collection_manager.gd")
 const CollectionBase = CollectionManager.CollectionBase
 
 const COLLECTIONS_DIR = "user://addons/collections/"

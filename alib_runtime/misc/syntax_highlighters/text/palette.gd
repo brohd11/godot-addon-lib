@@ -5,7 +5,7 @@ extends RefCounted
 ## Defaults are hardcoded so [code]Palette.new()[/code] is usable outside the editor.
 ## Use [method from_editor_settings] to match the user's script editor theme.
 
-const SELF_PATH = "res://addons/addon_lib/brohd/alib_runtime/misc/syntax_highlighters/text/palette.gd"
+const SELF_PATH = "res://addons/_lib/brohd/alib_runtime/misc/syntax_highlighters/text/palette.gd"
 const _ES_BASE = "text_editor/theme/highlighting/"
 const _ES_GD_BASE = "text_editor/theme/highlighting/gdscript/"
 

@@ -1,11 +1,11 @@
 #! namespace ALibEditor.Singleton class EditorRaycast3D
 extends Singletons.Base
 
-const Intercept3D = preload("res://addons/addon_lib/brohd/alib_editor/misc/editor_raycast/component/3D/intercept_3D.gd")
-const ToolBase = preload("res://addons/addon_lib/brohd/alib_runtime/controller/viewport_raycast/component/base/tool_base.gd")
-const Raycast = preload("res://addons/addon_lib/brohd/alib_editor/misc/editor_raycast/component/3D/raycast_3D.gd")
+const Intercept3D = preload("res://addons/_lib/brohd/alib_editor/misc/editor_raycast/component/3D/intercept_3D.gd")
+const ToolBase = preload("res://addons/_lib/brohd/alib_runtime/controller/viewport_raycast/component/base/tool_base.gd")
+const Raycast = preload("res://addons/_lib/brohd/alib_editor/misc/editor_raycast/component/3D/raycast_3D.gd")
 
-const PE_STRIP_CAST_SCRIPT = preload("res://addons/addon_lib/brohd/alib_editor/misc/editor_raycast/editor_raycast_3D.gd")
+const PE_STRIP_CAST_SCRIPT = preload("res://addons/_lib/brohd/alib_editor/misc/editor_raycast/editor_raycast_3D.gd")
 static func get_singleton_name() -> String:
 	return "EditorRaycast3D"
 

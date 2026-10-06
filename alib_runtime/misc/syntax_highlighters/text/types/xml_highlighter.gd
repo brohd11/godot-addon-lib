@@ -1,4 +1,4 @@
-extends "res://addons/addon_lib/brohd/alib_runtime/misc/syntax_highlighters/text/hl_base.gd"
+extends "res://addons/_lib/brohd/alib_runtime/misc/syntax_highlighters/text/hl_base.gd"
 
 ## xml - tags, attributes, entities, comments and CDATA.
 ##

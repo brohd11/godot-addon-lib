@@ -1,6 +1,6 @@
 #! namespace ALibEditor.Nodes class FileSystem
 
-const PopupID = preload("res://addons/addon_lib/brohd/alib_editor/utils/src/editor_nodes/filesystem/popup_id.gd")
+const PopupID = preload("res://addons/_lib/brohd/alib_editor/utils/src/editor_nodes/filesystem/popup_id.gd")
 const NUTree = preload("uid://coqq638olix8k") #! resolve ALibRuntime.NodeUtils.NUTree
 
 static func get_tree():

@@ -1,6 +1,6 @@
 extends RefCounted
 
-const Intercept = preload("res://addons/addon_lib/brohd/alib_runtime/controller/viewport_raycast/component/base/intercept_base.gd")
+const Intercept = preload("res://addons/_lib/brohd/alib_runtime/controller/viewport_raycast/component/base/intercept_base.gd")
 const EventType = Intercept.EventType
 
 

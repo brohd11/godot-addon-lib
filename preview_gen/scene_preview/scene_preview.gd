@@ -3,7 +3,7 @@ extends Node
 const UString = preload("uid://bbk1yedqm7a6a") #! resolve ALibRuntime.Utils.UString.Methods
 const PackedSceneReadFile = preload("uid://dr3oreheg7dr0") #! resolve ALibRuntime.Utils.UResource.UPackedScene.ReadFile
 
-const ScenePreviewViewport = preload("res://addons/addon_lib/brohd/preview_gen/scene_preview/scene_preview_viewport.gd")
+const ScenePreviewViewport = preload("res://addons/_lib/brohd/preview_gen/scene_preview/scene_preview_viewport.gd")
 
 const VALID_ROOTS = ["Node3D", "MeshInstance3D", "Decal", "StaticBody3D", "Character"]
 
