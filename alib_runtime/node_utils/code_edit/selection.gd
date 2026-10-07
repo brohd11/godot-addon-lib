@@ -34,17 +34,17 @@ func get_strings():
 	return string_map.get_strings()
 
 
-static func get_selected_line_data(script_editor:CodeEdit, max_lines:=500):
+static func get_selected_line_data(_script_editor:CodeEdit, max_lines:=500):
 	var data = {}
-	if script_editor.has_selection():
-		var sel_start = script_editor.get_selection_from_line()
-		var sel_end = script_editor.get_selection_to_line()
+	if _script_editor.has_selection():
+		var sel_start = _script_editor.get_selection_from_line()
+		var sel_end = _script_editor.get_selection_to_line()
 		if sel_end - sel_start > max_lines:
 			return {}
 		for i in range(sel_start, sel_end + 1):
-			data[i] = script_editor.get_line(i)
+			data[i] = _script_editor.get_line(i)
 	else:
-		var current_line  = script_editor.get_caret_line()
-		data[current_line] = script_editor.get_line(current_line)
+		var current_line  = _script_editor.get_caret_line()
+		data[current_line] = _script_editor.get_line(current_line)
 	
 	return data

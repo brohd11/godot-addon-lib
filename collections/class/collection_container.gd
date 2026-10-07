@@ -6,7 +6,7 @@ const CollectionSingleton = preload("res://addons/_lib/brohd/collections/collect
 var viewport:Viewport
 var get_preview_callable
 
-var right_click_handler: ClickHandlers.RightClickHandler
+var right_click_handler: UtilR.Nodes.PopupMenus.Placer
 
 var current_collection:CollectionSingleton.CollectionManager.CollectionBase
 var collection_manager:= CollectionSingleton.get_manager(CollectionSingleton.CollectionType.STANDARD)
@@ -284,7 +284,7 @@ func erase_collection(collection):
 func _build_nodes():
 	if is_instance_valid(right_click_handler):
 		return
-	right_click_handler = ClickHandlers.RightClickHandler.new()
+	right_click_handler = UtilR.Nodes.PopupMenus.Placer.new()
 	add_child(right_click_handler)
 	_get_editor_values()
 	

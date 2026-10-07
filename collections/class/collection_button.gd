@@ -2,7 +2,7 @@ extends Button
 
 const CollectionSingleton = preload("res://addons/_lib/brohd/collections/collection_singleton.gd")
 
-var _right_click_handler := ClickHandlers.RightClickHandler.new()
+var _right_click_handler := UtilR.Nodes.PopupMenus.Placer.new()
 var current_collection:CollectionSingleton.CollectionManager.CollectionBase
 
 var collection_manager:= CollectionSingleton.get_manager(CollectionSingleton.CollectionType.STANDARD)
@@ -42,7 +42,7 @@ func _remove_file_from_collection(file_path):
 
 
 func _on_collections_pressed():
-	var options = ClickHandlers.RightClickHandler.Options.new()
+	var options = UtilR.Nodes.PopupMenus.Placer.Options.new()
 	var collections = collection_manager.collections
 	if not collections.is_empty():
 		for collection in collections.values():

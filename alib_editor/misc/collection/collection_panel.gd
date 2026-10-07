@@ -2,7 +2,7 @@ extends VBoxContainer
 
 const CollectionContainer = preload("res://addons/_lib/brohd/collections/class/collection_container.gd")
 
-var right_click_handler:ClickHandlers.RightClickHandler
+var right_click_handler:UtilR.Nodes.PopupMenus.Placer
 var collection_container:CollectionContainer
 
 var _dock_data:Dictionary
@@ -30,7 +30,7 @@ func _build_nodes():
 	if is_instance_valid(collection_container):
 		return
 	
-	right_click_handler = ClickHandlers.RightClickHandler.new()
+	right_click_handler = UtilR.Nodes.PopupMenus.Placer.new()
 	add_child(right_click_handler)
 	
 	collection_container = CollectionContainer.new()
@@ -49,7 +49,7 @@ func _on_left_clicked():
 	pass
 
 func _on_right_clicked():
-	var options = ClickHandlers.RightClickHandler.Options.new()
+	var options = UtilR.Nodes.PopupMenus.Placer.Options.new()
 	options.add_option("Remove Asset(s)", collection_container.remove_item.bind(collection_container.get_selected_indexes()), ["Clear"])
 	right_click_handler.display_popup(options)
 
@@ -60,7 +60,7 @@ func _on_collections_button_pressed():
 
 
 static func get_collections_options(_collection_container:CollectionContainer):
-	var options = ClickHandlers.RightClickHandler.Options.new()
+	var options = UtilR.Nodes.PopupMenus.Placer.Options.new()
 	var collections = _collection_container.get_collections()
 	if not collections.is_empty():
 		for collection in collections:

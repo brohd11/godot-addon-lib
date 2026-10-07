@@ -29,7 +29,7 @@ static func pick_signals_dialog(signals_to_display:PackedStringArray=[], valid_s
 	dialog.set_title("Editor Signals")
 	dialog.default_size = Vector2(500, 300)
 	
-	var right_click_handler = ClickHandlers.RightClickHandler.new()
+	var right_click_handler = UtilR.Nodes.PopupMenus.Placer.new()
 	dialog.add_content(right_click_handler, Dialog.Handlers.General.TargetSection.ROOT)
 	
 	var file_list = LineEditList.new()
@@ -39,7 +39,7 @@ static func pick_signals_dialog(signals_to_display:PackedStringArray=[], valid_s
 	var signals_button = Button.new()
 	signals_button.icon = EditorIcons.get_icon_white("Signal")
 	var signal_callable = func():
-		var options = ClickHandlers.RightClickHandler.Options.new()
+		var options = UtilR.Nodes.PopupMenus.Placer.Options.new()
 		for signal_name in EditorGlobalSignals.get_signal_bus().get_signal_names():
 			if valid_signals.is_empty() or signal_name in valid_signals:
 				options.add_option(signal_name, file_list.new_entry.bind(signal_name))

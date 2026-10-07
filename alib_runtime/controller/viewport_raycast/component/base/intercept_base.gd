@@ -1,6 +1,6 @@
 extends Control
 
-const ClickState = preload("uid://bp4nmev3f3fcc") # click_state.gd
+const ClickState = preload("uid://c8l2o7cw3fklh") #! resolve UtilR.Inputs.ClickState
 
 enum EventType{
 	NONE,

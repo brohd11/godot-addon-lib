@@ -1,6 +1,6 @@
 extends Control
 
-const ClickState = preload("res://addons/_lib/brohd/gui_click_handler/click_state.gd")
+const ClickState = preload("uid://c8l2o7cw3fklh") #! resolve UtilR.Inputs.ClickState
 
 enum Position {
 	TOP_LEFT,

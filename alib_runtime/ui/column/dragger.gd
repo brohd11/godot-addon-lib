@@ -1,6 +1,6 @@
 extends Control
 
-const ClickState = preload("uid://bp4nmev3f3fcc") #! resolve ClickHandlers.ClickState
+const ClickState = preload("uid://c8l2o7cw3fklh") #! resolve UtilR.Inputs.ClickState
 
 var dragging: bool = false
 var target_control: Control

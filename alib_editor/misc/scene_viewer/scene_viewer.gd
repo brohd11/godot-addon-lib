@@ -6,7 +6,7 @@ const PluginButton = preload("uid://cwiqk1fttu0sy").PluginButton #! resolve ALib
 const EditorIcons = preload("uid://viocyrti6wce") #! resolve ALibEditor.Singleton.EditorIcons
 const SettingHelperSingleton = preload("uid://60187tsv40mq") #! resolve SettingHelper.Singleton
 const SettingHelperJson = preload("uid://dku4srj2t8htd") #! resolve SettingHelper.Json
-const Options = preload("uid://c61qxuau2v0pb") #! resolve ALibRuntime.Popups.Options
+const Options = preload("uid://dxdxq2n3imf4q") #! resolve UtilR.Nodes.PopupMenus.Options
 
 const MeshManager = preload("res://addons/_lib/brohd/alib_editor/misc/scene_viewer/components/mesh_manager.gd")
 const NodeTree = preload("res://addons/_lib/brohd/alib_editor/misc/scene_viewer/components/node_tree.gd")
@@ -27,7 +27,7 @@ var _dock_data:Dictionary = {}
 
 var setting_helper:SettingHelperJson
 
-var right_click_handler:ClickHandlers.RightClickHandler
+var right_click_handler:UtilR.Nodes.PopupMenus.Placer
 
 var toolbar:HBoxContainer
 
@@ -419,7 +419,7 @@ func _build_nodes():
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	size_flags_vertical = Control.SIZE_EXPAND_FILL
 	
-	right_click_handler = ClickHandlers.RightClickHandler.new()
+	right_click_handler = UtilR.Nodes.PopupMenus.Placer.new()
 	add_child(right_click_handler)
 	
 	var font = EditorInterface.get_editor_theme().get_font("default_font", "")

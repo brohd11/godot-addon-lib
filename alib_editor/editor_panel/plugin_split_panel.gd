@@ -2,8 +2,8 @@ extends Control
 #! import_p Keys,
 
 const PluginSplitPanel = preload("res://addons/_lib/brohd/alib_editor/editor_panel/plugin_split_panel.gd")
-const RightClickHandler = preload("res://addons/_lib/brohd/gui_click_handler/right_click_handler.gd")
-const ClickState = preload("res://addons/_lib/brohd/gui_click_handler/click_state.gd")
+const RightClickHandler = preload("uid://cs6pl78crcr0g") #! resolve UtilR.Nodes.PopupMenus.Placer
+const ClickState = preload("uid://c8l2o7cw3fklh") #! resolve UtilR.Inputs.ClickState
 const UFile = preload("uid://bl33psa06nv1e") #! resolve ALibRuntime.Utils.UFile.Methods
 const UResource = preload("uid://72uu8yngsoht") #! resolve ALibRuntime.Utils.UResource
 const Margin = preload("uid://b5wdpe8qi1pqg") #! resolve ALibEditor.UIHelpers.Margin
