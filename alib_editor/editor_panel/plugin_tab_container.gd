@@ -8,7 +8,7 @@ const UFile = preload("uid://bl33psa06nv1e") #! resolve ALibRuntime.Utils.UFile.
 const EditorIcons = preload("uid://viocyrti6wce") #! resolve ALibEditor.Singleton.EditorIcons
 const UResource = preload("uid://72uu8yngsoht") #! resolve ALibRuntime.Utils.UResource
 const UWindow = preload("uid://d1yl3cuumcudy") #! resolve UtilR.Nodes.UWindow
-const LineSubmit = preload("uid://dmilkaqawd510") #! resolve ALibRuntime.Dialog.Handlers.LineSubmit
+const LineSubmit = preload("uid://vtkuh2gtwy1b") #! resolve Dialogs.Handlers.LineSubmit
 
 static func get_scene_path():
 	return "uid://2dvub2jcbmvm" #! ensure-path
@@ -223,9 +223,9 @@ func _rename_tab(tab:int):
 	var rect = tab_bar.get_tab_rect(tab)
 	rect.position += UWindow.get_control_absolute_position(tab_bar)
 	var line = LineSubmit.new(self, rect, false)
-	
-	var new = await line.line_submitted
-	if new == old_name or new == "":
+	var resp:Dialogs.Response = await line.handled
+	var new = resp.payload
+	if resp.cancelled or new == old_name or new == "":
 		return
 	tab_bar.set_tab_title(tab, new)
 
