@@ -1,7 +1,7 @@
 @tool
 extends Tree
 
-const EditorIcons = preload("uid://viocyrti6wce") #! resolve ALibEditor.Singleton.EditorIcons
+const EditorIcons = preload("uid://viocyrti6wce") #! resolve UIPlugin.EditorIcons
 
 var scene_info = {}
 var tree_items = {}

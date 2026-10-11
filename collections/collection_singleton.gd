@@ -1,7 +1,7 @@
 
 extends Singletons.Base
 
-const Form = preload("res://addons/_lib/brohd/alib_runtime/dialog/form/form.gd")
+const Form = preload("res://addons/_lib/dialog_form/src/form.gd")
 
 
 
@@ -108,9 +108,10 @@ func _new_collection_dialog(collection_type:CollectionType):
 			"placeholder":"Enter name..."
 		}
 	})
-	var result = await form.show_dialog()
-	if result is String and (result == Form.CANCEL_STRING or result == ""):
+	var resp = await form.show_dialog()
+	if resp.cancelled:
 		return
+	var result = resp.payload
 	
 	var new_name = result.get("New Collection Name")
 	new_name = new_name.trim_prefix("/").trim_suffix("/")

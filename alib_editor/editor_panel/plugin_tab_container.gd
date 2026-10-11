@@ -5,7 +5,7 @@ extends Control
 
 const RightClickHandler = preload("uid://cs6pl78crcr0g") #! resolve UtilR.Nodes.PopupMenus.Placer
 const UFile = preload("uid://bl33psa06nv1e") #! resolve ALibRuntime.Utils.UFile.Methods
-const EditorIcons = preload("uid://viocyrti6wce") #! resolve ALibEditor.Singleton.EditorIcons
+const EditorIcons = preload("uid://viocyrti6wce") #! resolve UIPlugin.EditorIcons
 const UResource = preload("uid://72uu8yngsoht") #! resolve ALibRuntime.Utils.UResource
 const UWindow = preload("uid://d1yl3cuumcudy") #! resolve UtilR.Nodes.UWindow
 const LineSubmit = preload("uid://vtkuh2gtwy1b") #! resolve Dialogs.Handlers.LineSubmit

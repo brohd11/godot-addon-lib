@@ -2,8 +2,8 @@ extends VBoxContainer
 
 #! import_p Keys,
 
-const PluginButton = preload("uid://cwiqk1fttu0sy").PluginButton #! resolve ALibEditor.UIHelpers.Buttons.PluginButton
-const EditorIcons = preload("uid://viocyrti6wce") #! resolve ALibEditor.Singleton.EditorIcons
+const PluginButton = preload("uid://redtm8tuamgm") #! resolve UIPlugin.PluginButton
+const EditorIcons = preload("uid://viocyrti6wce") #! resolve UIPlugin.EditorIcons
 const SettingHelperSingleton = preload("uid://60187tsv40mq") #! resolve SettingHelper.Singleton
 const SettingHelperJson = preload("uid://dku4srj2t8htd") #! resolve SettingHelper.Json
 const Options = preload("uid://dxdxq2n3imf4q") #! resolve UtilR.Nodes.PopupMenus.Options
