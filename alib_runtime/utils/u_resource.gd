@@ -7,7 +7,7 @@ const UFile = preload("uid://bl33psa06nv1e") #! resolve ALibRuntime.Utils.UFile.
 const Audio = preload("res://addons/_lib/brohd/alib_runtime/utils/resource/audio.gd")
 const ImageSize = preload("res://addons/_lib/brohd/alib_runtime/utils/resource/image_size.gd")
 const UPackedScene = preload("res://addons/_lib/brohd/alib_runtime/utils/resource/packed_scene.gd")
-const Dependencies = preload("res://addons/_lib/brohd/alib_runtime/utils/resource/dependencies.gd")
+const Dependencies = preload("res://addons/_lib/dep_map/dependencies.gd")
 
 #^ temp
 const Methods = preload("res://addons/_lib/brohd/alib_runtime/utils/resource/u_resource_methods.gd")
