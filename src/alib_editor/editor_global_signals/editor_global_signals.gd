@@ -1,10 +1,11 @@
 class_name EditorGlobalSignals
 
-const Dialog = preload("uid://bccd38qwc47vu") #! resolve ALibRuntime.Dialog
 const LineEditList = preload("uid://bipuqam2kunfj") #! resolve ALibRuntime.UICustom.LineEditList
-const EditorIcons = preload("uid://viocyrti6wce") #! resolve UIPlugin.EditorIcons
 
-const SignalBus = SignalBusSingleton.SignalBus
+const GeneralDialog = preload("uid://be87r73w16wa5") #! resolve Dialogs.Base.General
+const EditorIcons = preload("uid://viocyrti6wce") #! resolve UIPlugin.EditorIcons
+const PopupPlacer = preload("uid://cs6pl78crcr0g") #! resolve UtilR.Nodes.PopupMenus.Placer
+const SignalBus = preload("uid://dlqk1ia5qfcgg") #! resolve SignalBusSingleton.SignalBus
 
 const BUS_NAME = &"EditorGlobalSignals"
 
@@ -25,12 +26,12 @@ static func signal_emitv(signal_name:StringName, arg_array:Array=[]):
 
 
 static func pick_signals_dialog(signals_to_display:PackedStringArray=[], valid_signals:PackedStringArray=[]):
-	var dialog = Dialog.Handlers.General.new()
+	var dialog = GeneralDialog.new()
 	dialog.set_title("Editor Signals")
 	dialog.default_size = Vector2(500, 300)
 	
-	var right_click_handler = UtilR.Nodes.PopupMenus.Placer.new()
-	dialog.add_content(right_click_handler, Dialog.Handlers.General.TargetSection.ROOT)
+	var right_click_handler = PopupPlacer.new()
+	dialog.add_content(right_click_handler, GeneralDialog.TargetSection.ROOT)
 	
 	var file_list = LineEditList.new()
 	file_list.set_background(EditorInterface.get_editor_theme().get_stylebox("panel", "ItemList"))
@@ -39,7 +40,7 @@ static func pick_signals_dialog(signals_to_display:PackedStringArray=[], valid_s
 	var signals_button = Button.new()
 	signals_button.icon = EditorIcons.get_icon_white("Signal")
 	var signal_callable = func():
-		var options = UtilR.Nodes.PopupMenus.Placer.Options.new()
+		var options = PopupPlacer.Options.new()
 		for signal_name in EditorGlobalSignals.get_signal_bus().get_signal_names():
 			if valid_signals.is_empty() or signal_name in valid_signals:
 				options.add_option(signal_name, file_list.new_entry.bind(signal_name))
@@ -54,8 +55,9 @@ static func pick_signals_dialog(signals_to_display:PackedStringArray=[], valid_s
 	
 	dialog.add_content(file_list)
 	
-	var result = await dialog.show_dialog()
-	if result is String and result == dialog.CANCEL_STRING:
+	var resp = await dialog.get_response()
+	if resp.cancelled:
 		return
+	
 	var entries = file_list.get_entries()
 	return entries

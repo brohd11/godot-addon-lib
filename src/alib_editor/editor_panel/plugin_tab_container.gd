@@ -320,12 +320,11 @@ func _new_tab_button_path_chosen(scene_path:String):
 		_show_tab(0)
 
 func _open_choose_scene_dialog():
-	var dialog = EditorFileDialogHandler.File.new(self)
-	var handled = await dialog.handled
-	if handled == dialog.CANCEL_STRING:
+	var dialog = Dialogs.Handlers.FilePicker.Editor.file(self)
+	var resp = await dialog.get_response()
+	if resp.cancelled:
 		return
-	
-	var control = load_plugin_control(handled) as Control
+	var control = load_plugin_control(resp.payload) as Control
 	if control:
 		_on_new_plugin_tab(control)
 

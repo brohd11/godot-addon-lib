@@ -4,9 +4,6 @@ const UString = preload("uid://bbk1yedqm7a6a") #! resolve ALibRuntime.Utils.UStr
 const UStringToken = preload("uid://ckamjm80ocd1x") #! resolve ALibRuntime.Utils.UString.Token
 const UClassDetail = preload("uid://dpmubecadgfk8") #! resolve ALibRuntime.Utils.UGDScript.UClassDetail
 
-
-const VarInsertType = preload("res://addons/_lib/brohd/src/alib_editor/utils/src/gdscript/var_insert_type.gd")
-
 enum ContextType {
 	
 }

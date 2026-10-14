@@ -2,13 +2,14 @@ extends Control
 #! import_p Keys,
 
 const PluginSplitPanel = preload("res://addons/_lib/brohd/src/alib_editor/editor_panel/plugin_split_panel.gd")
+
 const RightClickHandler = preload("uid://cs6pl78crcr0g") #! resolve UtilR.Nodes.PopupMenus.Placer
 const ClickState = preload("uid://c8l2o7cw3fklh") #! resolve UtilR.Inputs.ClickState
-const UFile = preload("uid://bl33psa06nv1e") #! resolve ALibRuntime.Utils.UFile.Methods
-const UResource = preload("uid://72uu8yngsoht") #! resolve ALibRuntime.Utils.UResource
-const Margin = preload("uid://b5wdpe8qi1pqg") #! resolve ALibEditor.UIHelpers.Margin
+const UFile = preload("uid://bqfy5cvhth0m1") #! resolve UtilR.Files.UFile
+const UObject = preload("uid://3ris0kamdyic") #! resolve UtilR.Objects.UObject
 
-const ThemeColor = preload("uid://dsukbd2hmebmw") #! resolve ALibEditor.Utils.UEditorTheme.ThemeColor
+const EditorColors = preload("uid://cpw0fsrs38esk") #! resolve UtilE.Colors
+const Margin = preload("uid://b5wdpe8qi1pqg") #! resolve ALibEditor.UIHelpers.Margin
 #const ButtonDetector = preload("res://addons/_lib/brohd/src/alib_editor/editor_panel/button_detector.gd")
 
 const DogEarButton = preload("res://addons/_lib/brohd/src/alib_runtime/ui/dog_ear/dog_ear_button.gd")
@@ -78,7 +79,7 @@ func _ready():
 	var buttons_bg = ColorRect.new()
 	add_child(buttons_bg)
 	buttons_bg.mouse_filter = Control.MOUSE_FILTER_PASS
-	buttons_bg.color = ThemeColor.get_theme_color(ThemeColor.Type.BACKGROUND)
+	buttons_bg.color = EditorColors.get_theme_color(EditorColors.ThemeColor.BACKGROUND)
 	buttons_bg.hide()
 	
 	var margin = MarginContainer.new()
@@ -339,7 +340,7 @@ func _serialize_node(node: Control) -> Dictionary:
 		data[Keys.TYPE] = Keys.TYPE_PANEL
 		if node.get_child_count() > 0:
 			var control = node.get_control()
-			var path = UResource.get_object_file_path(control)
+			var path = UObject.get_object_file_path(control)
 			if path:
 				data[Keys.CONTENT_PATH] = path
 				var uid = UFile.path_to_uid(path)
@@ -384,7 +385,7 @@ func _deserialize_node(data: Dictionary, parent: Control):
 		else:
 			path = UFile.uid_to_path(path)
 		if path != "":
-			var scene = UResource.instance_scene_or_script(path)
+			var scene = UObject.instance_scene_or_script(path)
 			if scene:
 				p.add_control(scene)
 				if panel_dock_data and scene.has_method(Keys.METHOD_SET_DOCK_DATA):
@@ -463,17 +464,17 @@ func _on_picker_clicked(panel:MoveablePanel):
 
 
 func _on_picker_option_picked(panel:MoveablePanel, path:String):
-	var control = UResource.instance_scene_or_script(path)
+	var control = UObject.instance_scene_or_script(path)
 	if control == null:
 		return
 	panel.add_control(control)
 
 func _on_picker_open_picked(panel:MoveablePanel):
-	var dialog = EditorFileDialogHandler.File.new()
-	var handled = await dialog.handled
-	if handled == dialog.CANCEL_STRING:
+	var dialog = Dialogs.Handlers.FilePicker.Editor.file(self)
+	var resp = await dialog.get_response()
+	if resp.cancelled:
 		return
-	_on_picker_option_picked(panel, handled)
+	_on_picker_option_picked(panel, resp.payload)
 
 func _on_editor_theme_changed():
 	_create_style_boxes()
@@ -481,15 +482,15 @@ func _on_editor_theme_changed():
 func _create_style_boxes():
 	var ed_scale = EditorInterface.get_editor_scale()
 	_style_box_h = StyleBoxFlat.new()
-	_style_box_h.bg_color = ThemeColor.get_theme_color(ThemeColor.Type.BACKGROUND)
-	_style_box_h.border_color = ThemeColor.get_theme_color(ThemeColor.Type.BASE)
+	_style_box_h.bg_color = EditorColors.get_theme_color(EditorColors.ThemeColor.BACKGROUND)
+	_style_box_h.border_color = EditorColors.get_theme_color(EditorColors.ThemeColor.BASE)
 	_style_box_h.border_width_left = 4 * ed_scale
 	_style_box_h.border_width_right = 4 * ed_scale
 	#_style_box_h.expand_margin_top = 6
 	
 	_style_box_v = StyleBoxFlat.new()
-	_style_box_v.bg_color = ThemeColor.get_theme_color(ThemeColor.Type.BACKGROUND)
-	_style_box_v.border_color = ThemeColor.get_theme_color(ThemeColor.Type.BASE)
+	_style_box_v.bg_color = EditorColors.get_theme_color(EditorColors.ThemeColor.BACKGROUND)
+	_style_box_v.border_color = EditorColors.get_theme_color(EditorColors.ThemeColor.BASE)
 	_style_box_v.border_width_top = 4 * ed_scale
 	_style_box_v.border_width_bottom = 4 * ed_scale
 	#_style_box_v.expand_margin_top = 6

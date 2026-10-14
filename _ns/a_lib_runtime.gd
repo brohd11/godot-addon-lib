@@ -3,7 +3,6 @@
 class_name ALibRuntime
 
 const DebugPrint = preload("uid://b6eu2njyvit6k") # res://addons/_lib/brohd/src/alib_runtime/debug/print_debug.gd
-const Dialog = preload("uid://bccd38qwc47vu") # res://addons/_lib/brohd/src/alib_runtime/dialog/dialog.gd
 const NodeUtils = preload("uid://cqds78ent2bq0") # res://addons/_lib/brohd/_ns/a_lib_runtime/node_utils.gd
 const PopupHelper = preload("uid://bb13ihrvdkjdj") # res://addons/_lib/brohd/src/alib_runtime/popup_menu/popup_menu_path_helper.gd
 const TreeHelperBase = preload("uid://bm6fl2iu4jew7") # res://addons/_lib/brohd/src/alib_runtime/tree_helper/tree_helper_base.gd
