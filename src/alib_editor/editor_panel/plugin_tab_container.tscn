@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://2dvub2jcbmvm"]
+
+[ext_resource type="Script" uid="uid://ctutcmmga2vy6" path="res://addons/_lib/brohd/src/alib_editor/editor_panel/plugin_tab_container.gd" id="1_kb7fn"]
+[ext_resource type="Script" uid="uid://cs6pl78crcr0g" path="res://addons/_lib/util_r/src/node/popup/placer.gd" id="2_ht4if"]
+
+[node name="PluginTabContainer" type="Control" unique_id=949781492]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kb7fn")
+
+[node name="RightClickHandler" type="Node" parent="." unique_id=729702903]
+script = ExtResource("2_ht4if")
+
+[node name="TopV" type="VBoxContainer" parent="." unique_id=2018366602]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="TabV" type="VBoxContainer" parent="TopV" unique_id=1146585986]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="H" type="HBoxContainer" parent="TopV/TabV" unique_id=849251120]
+layout_mode = 2
+
+[node name="Panel" type="PanelContainer" parent="TopV/TabV/H" unique_id=1012181086]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TabBar" type="TabBar" parent="TopV/TabV/H/Panel" unique_id=1753566980]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tab_close_display_policy = 1
+drag_to_rearrange_enabled = true
+tabs_rearrange_group = 0
+select_with_rmb = true
+
+[node name="NewTabButton" type="Button" parent="TopV/TabV/H" unique_id=501700346]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+
+[node name="DockButton" type="Button" parent="TopV/TabV/H" unique_id=2095524999]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+focus_mode = 0
+
+[node name="Spacer" type="Control" parent="TopV/TabV" unique_id=1576495968]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="TopV" unique_id=1909754513]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
