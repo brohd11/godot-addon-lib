@@ -4,8 +4,6 @@ extends RefCounted
 const UTexture = preload("uid://ddu76iygjkxih") #! resolve ALibRuntime.Utils.UTexture
 const UFile = preload("uid://bl33psa06nv1e") #! resolve ALibRuntime.Utils.UFile.Methods
 
-const Audio = preload("res://addons/_lib/brohd/src/alib_runtime/utils/resource/audio.gd")
-const ImageSize = preload("res://addons/_lib/brohd/src/alib_runtime/utils/resource/image_size.gd")
 const UPackedScene = preload("res://addons/_lib/brohd/src/alib_runtime/utils/resource/packed_scene.gd")
 
 #^ temp

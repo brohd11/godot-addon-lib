@@ -1,6 +1,6 @@
 extends Control
 
-const Dragger = preload("res://addons/_lib/brohd/src/alib_runtime/ui/column/dragger.gd")
+const Dragger = preload("uid://chpprqftv7wt6") #! resolve UIRuntime.ColumnDragger
 
 static func get_v_split(scrollable:=false):
 	var instance = new()
